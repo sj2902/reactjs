@@ -8,16 +8,18 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
-const useStyles = makeStyles((theme) => ({
+const loginStyles = makeStyles((theme) => ({
   main: {
-    backgroundColor: '#7E8BFF',
-    padding: '20px',
+    backgroundColor: '#ded9d9',
+    width: '100%',
+    minHeight: '100vh',
+    // padding: '20px',
     display: "flex",
     justifyContent: "center",
     alignItems: "center"
   },
   paper: {
-    marginTop: theme.spacing(8),
+    
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -32,50 +34,26 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
-    backgroundColor: '#FF6F6F',
+    backgroundColor: '#D2938F',
   },
   detail: {
     backgroundColor: 'white',
-  }
+  },
 }));
 
-function SignUp() {
-  const classes = useStyles();
+function Login() {
+  const classes = loginStyles();
   return (
     <div className={classes.main}>
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
-          Sign Up
+         Log In
         </Typography>
         <form className={classes.form} noValidate>
           <Grid  container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                autoComplete="fname"
-                name="firstName"
-                variant="outlined"
-                required
-                fullWidth
-                id="firstName"
-                label="First Name"
-                className={classes.detail}
-                autoFocus
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                autoComplete="lname"
-                className={classes.detail}
-              />
-            </Grid>
+            
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -101,31 +79,19 @@ function SignUp() {
                 className= {classes.detail}
               />
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="Cpassword"
-                label="Confim Password"
-                type="password"
-                id="Cpassword"
-                autoComplete="current-password"
-                className={classes.detail}
-              />
-            </Grid>
+        
           </Grid>
           <Button
             type="submit"
             variant="contained"
             className={classes.submit}
           >
-            Join Now
+              Log In
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item className={classes.link}>
               <Link href="#" variant="body2">
-                Already have an account? Sign in
+                Don't have an account? sign up
               </Link>
             </Grid>
           </Grid>
@@ -135,4 +101,4 @@ function SignUp() {
   </div>
   );
 }
-export default SignUp;
+export default Login;
