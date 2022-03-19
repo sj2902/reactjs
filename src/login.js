@@ -7,22 +7,29 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+// import SignUp from './signUp';
+// import  {BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom';
+
+
+
 
 const loginStyles = makeStyles((theme) => ({
   main: {
     backgroundColor: '#ded9d9',
-    width: '100%',
-    minHeight: '100vh',
-    // padding: '20px',
     display: "flex",
     justifyContent: "center",
-    alignItems: "center"
-  },
-  paper: {
-    
-    display: 'flex',
-    flexDirection: 'column',
     alignItems: 'center',
+    
+  },
+  
+  paper: {
+    color: 'black',
+    
+  },
+  title: {
+    
+    marginLeft: '40%',
+    marginRight: '25%',
   },
   avatar: {
     margin: theme.spacing(1),
@@ -33,24 +40,56 @@ const loginStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(3),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
+    
     backgroundColor: '#D2938F',
+    width: '50%',
+    marginLeft: '25%',
+    marginRight: '25%',
+    marginTop: '5%'
+    
   },
   detail: {
     backgroundColor: 'white',
+    color: 'black',
   },
+  link: {
+    marginTop: '4%',
+    marginLeft: '15%',
+    marginRight: '15%',
+  }
 }));
 
 function Login() {
   const classes = loginStyles();
+  // const initialValues = {email: "" , password: ""};
+  // const [formValues, setFormValues] = useState(initialValues);
+  // const [formErrors, setFormErrors] = useState({});
+  // const handleChange = (e) => {
+  //   console.log(e.target);
+  //   const {name, value} =e.target;
+  //   setFormValues({...formValues, name: value});
+  //   console.log(formValues);
+  // }
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   setFormErrors(validate(formValues));
+  // }
+  // const validate = (values) => {
+  //   const errors = {}
+  //   const regex = 
+  // }
+
+
   return (
     <div className={classes.main}>
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
+        <div className={classes.title}>
         <Typography component="h1" variant="h5">
          Log In
         </Typography>
+        </div>
         <form className={classes.form} noValidate>
           <Grid  container spacing={2}>
             
@@ -64,6 +103,8 @@ function Login() {
                 name="email"
                 autoComplete="email"
                 className= {classes.detail}
+                // value={formValues.email}
+                // onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -77,6 +118,8 @@ function Login() {
                 id="password"
                 autoComplete="current-password"
                 className= {classes.detail}
+                // value={formValues.password}
+                // onChange={handleChange}
               />
             </Grid>
         
@@ -88,9 +131,10 @@ function Login() {
           >
               Log In
           </Button>
+          
           <Grid container justifyContent="flex-end">
             <Grid item className={classes.link}>
-              <Link href="#" variant="body2">
+              <Link to='/signUp' variant="body2">
                 Don't have an account? sign up
               </Link>
             </Grid>
