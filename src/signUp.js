@@ -11,16 +11,16 @@ import Container from '@material-ui/core/Container';
 const useStyles = makeStyles((theme) => ({
   main: {
     backgroundColor: '#7E8BFF',
-    padding: '20px',
     display: "flex",
     justifyContent: "center",
     alignItems: "center"
   },
   paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    color: 'black',
+  },
+  title: {
+    marginLeft: '35%',
+    marginRight: '25%',
   },
   avatar: {
     margin: theme.spacing(1),
@@ -31,12 +31,21 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(3),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
     backgroundColor: '#FF6F6F',
+    width: '50%',
+    marginLeft: '25%',
+    marginRight: '25%',
+    marginTop: '5%'
   },
   detail: {
     backgroundColor: 'white',
-  }
+  },
+  link: {
+    color: 'black',
+    marginTop: '4%',
+    marginLeft: '15%',
+    marginRight: '10%',
+  },
 }));
 
 function SignUp() {
@@ -46,9 +55,11 @@ function SignUp() {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
+        <div className={classes.title}>
         <Typography component="h1" variant="h5">
           Sign Up
         </Typography>
+        </div>
         <form className={classes.form} noValidate>
           <Grid  container spacing={2}>
             <Grid item xs={12}>
@@ -122,13 +133,13 @@ function SignUp() {
           >
             Join Now
           </Button>
-          <Grid container justifyContent="flex-end">
-            <Grid item className={classes.link}>
+          
+            <div className={classes.link}>
               <Link href="#" variant="body2">
                 Already have an account? Sign in
               </Link>
-            </Grid>
-          </Grid>
+            </div>
+          
         </form>
       </div>
     </Container>
