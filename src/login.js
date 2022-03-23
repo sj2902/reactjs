@@ -7,19 +7,14 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-// import SignUp from './signUp';
-// import  {BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom';
-
-
-
 
 const loginStyles = makeStyles((theme) => ({
   main: {
+    display: 'flex',
     backgroundColor: '#ded9d9',
-    display: "flex",
     justifyContent: "center",
     alignItems: 'center',
-    
+    margin: 0,
   },
   
   paper: {
@@ -27,9 +22,7 @@ const loginStyles = makeStyles((theme) => ({
     
   },
   title: {
-    
-    marginLeft: '40%',
-    marginRight: '25%',
+    marginTop: '20%',
   },
   avatar: {
     margin: theme.spacing(1),
@@ -37,7 +30,7 @@ const loginStyles = makeStyles((theme) => ({
   },
   form: {
     width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(3),
+    marginTop: theme.spacing(1),
   },
   submit: {
     

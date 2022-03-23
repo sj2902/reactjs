@@ -2,11 +2,11 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -134,10 +134,8 @@ function SignUp() {
             Join Now
           </Button>
           
-            <div className={classes.link}>
-              <Link href="#" variant="body2">
-                Already have an account? Sign in
-              </Link>
+            <div>
+                    Already have an account?  Log in
             </div>
           
         </form>
