@@ -1,14 +1,14 @@
 import React from 'react';
 import './App.css';
 import Login from './login';
-// import SignUp from './signUp';
-// import {BrowserRouter as Router, Routes , Route, Link} from 'react-router-dom';
+import SignUp from './signUp';
+
 
 
 function App(){
   return(
     <div className="App">
-      <Login/>
+      <SignUp />
     {/* <Router>
       <nav>
         <Link to='/signup'>SignUp</Link>

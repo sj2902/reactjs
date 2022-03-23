@@ -3,6 +3,7 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
+import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
@@ -17,10 +18,15 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#7E8BFF',
     display: "flex",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    height: '100vh'
   },
   paper: {
     color: 'black',
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   title: {
     marginLeft: '35%',
@@ -35,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(3),
   },
   submit: {
+    margin: theme.spacing(3, 0, 2),
     backgroundColor: '#FF6F6F',
     width: '50%',
     marginLeft: '25%',
@@ -77,8 +84,8 @@ function SignUp() {
   };
   const classes = useStyles();
   return (
-    <div className={classes.main}>
-    <Container component="main" maxWidth="xs">
+    // <div className={classes.main}>
+    <Container className={classes.main} component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
         <div className={classes.title}>
@@ -172,15 +179,18 @@ function SignUp() {
           >
             Join Now
           </Button>
-          
-            <div>
-                    Already have an account?  Log in
-            </div>
+          <Grid container justifyContent="flex-end">
+            <Grid item className={classes.link}>
+              <Link href="#" variant="body2">
+                Already have an account? Sign in
+              </Link>
+            </Grid>
+          </Grid>
           
         </form>
       </div>
     </Container>
-  </div>
+  // </div>
   );
 }
 export default SignUp;

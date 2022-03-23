@@ -8,21 +8,26 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+
 const loginStyles = makeStyles((theme) => ({
   main: {
     display: 'flex',
     backgroundColor: '#ded9d9',
     justifyContent: "center",
     alignItems: 'center',
-    margin: 0,
+    height: '100vh',
   },
   
   paper: {
     color: 'black',
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
     
   },
   title: {
-    marginTop: '20%',
+    margin: 0,
   },
   avatar: {
     margin: theme.spacing(1),
@@ -33,7 +38,7 @@ const loginStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(1),
   },
   submit: {
-    
+    margin: theme.spacing(3, 0, 2),
     backgroundColor: '#D2938F',
     width: '50%',
     marginLeft: '25%',
@@ -49,6 +54,7 @@ const loginStyles = makeStyles((theme) => ({
     marginTop: '4%',
     marginLeft: '15%',
     marginRight: '15%',
+    color: 'black',
   }
 }));
 
@@ -74,8 +80,7 @@ function Login() {
 
 
   return (
-    <div className={classes.main}>
-    <Container component="main" maxWidth="xs">
+    <Container className={classes.main} component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
         <div className={classes.title}>
@@ -135,7 +140,6 @@ function Login() {
         </form>
       </div>
     </Container>
-  </div>
   );
 }
 export default Login;
