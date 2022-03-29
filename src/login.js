@@ -1,3 +1,4 @@
+import{useState} from 'react';
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -7,7 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 
 const loginStyles = makeStyles((theme) => ({
   main: {
@@ -60,6 +61,18 @@ const loginStyles = makeStyles((theme) => ({
 
 function Login() {
   const classes = loginStyles();
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+
+  const Signin = async(e) => {
+    const authentication = getAuth();
+    e.preventDefault()
+
+    signInWithEmailAndPassword(authentication, loginEmail, loginPassword)
+    .then((response)=>{
+      console.log(response)
+    })
+  }  
   // const initialValues = {email: "" , password: ""};
   // const [formValues, setFormValues] = useState(initialValues);
   // const [formErrors, setFormErrors] = useState({});
@@ -101,6 +114,9 @@ function Login() {
                 name="email"
                 autoComplete="email"
                 className= {classes.detail}
+                onChange={(event) => {
+                  setLoginEmail(event.target.value);
+                }}
                 // value={formValues.email}
                 // onChange={handleChange}
               />
@@ -116,6 +132,9 @@ function Login() {
                 id="password"
                 autoComplete="current-password"
                 className= {classes.detail}
+                onChange={(event) => {
+                  setLoginPassword(event.target.value);
+                }}
                 // value={formValues.password}
                 // onChange={handleChange}
               />
@@ -123,6 +142,7 @@ function Login() {
         
           </Grid>
           <Button
+            onClick={Signin}
             type="submit"
             variant="contained"
             className={classes.submit}

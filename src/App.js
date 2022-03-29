@@ -8,7 +8,7 @@ import SignUp from './signUp';
 function App(){
   return(
     <div className="App">
-      <SignUp />
+      <Login />
     {/* <Router>
       <nav>
         <Link to='/signup'>SignUp</Link>
