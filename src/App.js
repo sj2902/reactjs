@@ -2,13 +2,21 @@ import React from 'react';
 import './App.css';
 import Login from './login';
 import SignUp from './signUp';
+import Courses from './Courses';
+import Trial from './trial';
+import Tutorial from './Tutorial';
+import "./tuto_style.css";
+
 
 
 
 function App(){
   return(
     <div className="App">
-      <SignUp />
+        {/* <SignUp /> */}
+        <Tutorial embedId='rtOvBOTyX00' />
+        
+      
     {/* <Router>
       <nav>
         <Link to='/signup'>SignUp</Link>

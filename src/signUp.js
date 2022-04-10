@@ -10,16 +10,22 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
 import { collection, addDoc } from "firebase/firestore"; 
-import db from "./firebase"
+import db from "./firebase";
+import Box from "@material-ui/core/Box";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 
 const useStyles = makeStyles((theme) => ({
+  '@media (min-width: 500px)' :{
+    display: 'none',
+  },
   main: {
     backgroundColor: '#7E8BFF',
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    height: '100vh'
+    height: '100vh',
+    overflow: 'hidden',
   },
   paper: {
     color: 'black',
@@ -43,19 +49,18 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
     backgroundColor: '#FF6F6F',
-    width: '50%',
+    width: '20%',
     marginLeft: '25%',
     marginRight: '25%',
     marginTop: '5%'
   },
   detail: {
     backgroundColor: 'white',
+    width: '30%',
   },
   link: {
-    color: 'black',
-    marginTop: '4%',
-    marginLeft: '15%',
-    marginRight: '10%',
+    textAlign: 'center',
+    paddingTop: '1em',
   },
 }));
 
@@ -85,7 +90,7 @@ function SignUp() {
   const classes = useStyles();
   return (
     // <div className={classes.main}>
-    <Container className={classes.main} component="main" maxWidth="xs">
+    <Box className={classes.main} component="main" >
       <CssBaseline />
       <div className={classes.paper}>
         <div className={classes.title}>
@@ -101,7 +106,7 @@ function SignUp() {
                 name="firstName"
                 variant="outlined"
                 required
-                fullWidth
+                
                 id="firstName"
                 label="First Name"
                 className={classes.detail}
@@ -115,7 +120,7 @@ function SignUp() {
               <TextField
                 variant="outlined"
                 required
-                fullWidth
+                
                 id="lastName"
                 label="Last Name"
                 name="lastName"
@@ -130,7 +135,7 @@ function SignUp() {
               <TextField
                 variant="outlined"
                 required
-                fullWidth
+                
                 id="email"
                 label="Email Address"
                 name="email"
@@ -145,7 +150,7 @@ function SignUp() {
               <TextField
                 variant="outlined"
                 required
-                fullWidth
+                
                 name="password"
                 label="Password"
                 type="password"
@@ -161,7 +166,7 @@ function SignUp() {
               <TextField
                 variant="outlined"
                 required
-                fullWidth
+                
                 name="Cpassword"
                 label="Confim Password"
                 type="password"
@@ -179,17 +184,17 @@ function SignUp() {
           >
             Join Now
           </Button>
-          <Grid container justifyContent="flex-end">
+          
             <Grid item className={classes.link}>
-              <Link href="#" variant="body2">
+              <Link href="#">
                 Already have an account? Sign in
               </Link>
             </Grid>
-          </Grid>
+          
           
         </form>
       </div>
-    </Container>
+    </Box>
   // </div>
   );
 }
