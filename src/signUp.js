@@ -1,31 +1,28 @@
 import{useState} from 'react';
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
 import { collection, addDoc } from "firebase/firestore"; 
 import db from "./firebase";
-import Box from "@material-ui/core/Box";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
+import Container from "@material-ui/core/Container";
+
+
 
 
 const useStyles = makeStyles((theme) => ({
-  '@media (min-width: 500px)' :{
-    display: 'none',
-  },
-  main: {
-    backgroundColor: '#7E8BFF',
+  
+  outer: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     height: '100vh',
-    overflow: 'hidden',
+    width: '100vw',
+    backgroundColor: '#7E8BFF',
   },
   paper: {
     color: 'black',
@@ -35,8 +32,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
   title: {
-    marginLeft: '35%',
-    marginRight: '25%',
+    margin: 0,
   },
   avatar: {
     margin: theme.spacing(1),
@@ -49,18 +45,18 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
     backgroundColor: '#FF6F6F',
-    width: '20%',
+    width: '25%',
     marginLeft: '25%',
     marginRight: '25%',
-    marginTop: '5%'
+    marginTop: '2%'
   },
   detail: {
     backgroundColor: 'white',
-    width: '30%',
+    width: '40%',
   },
   link: {
     textAlign: 'center',
-    paddingTop: '1em',
+    paddingTop: '1px',
   },
 }));
 
@@ -89,12 +85,11 @@ function SignUp() {
   };
   const classes = useStyles();
   return (
-    // <div className={classes.main}>
-    <Box className={classes.main} component="main" >
-      <CssBaseline />
+    
+    <div className={classes.outer} maxWidth="xs" >
       <div className={classes.paper}>
         <div className={classes.title}>
-        <Typography component="h1" variant="h5">
+        <Typography component="h2" variant="h5">
           Sign Up
         </Typography>
         </div>
@@ -106,7 +101,7 @@ function SignUp() {
                 name="firstName"
                 variant="outlined"
                 required
-                
+                fullWidth
                 id="firstName"
                 label="First Name"
                 className={classes.detail}
@@ -120,7 +115,7 @@ function SignUp() {
               <TextField
                 variant="outlined"
                 required
-                
+                fullWidth
                 id="lastName"
                 label="Last Name"
                 name="lastName"
@@ -135,7 +130,7 @@ function SignUp() {
               <TextField
                 variant="outlined"
                 required
-                
+                fullWidth
                 id="email"
                 label="Email Address"
                 name="email"
@@ -150,7 +145,7 @@ function SignUp() {
               <TextField
                 variant="outlined"
                 required
-                
+                fullWidth
                 name="password"
                 label="Password"
                 type="password"
@@ -166,7 +161,7 @@ function SignUp() {
               <TextField
                 variant="outlined"
                 required
-                
+                fullWidth
                 name="Cpassword"
                 label="Confim Password"
                 type="password"
@@ -176,6 +171,8 @@ function SignUp() {
               />
             </Grid>
           </Grid>
+
+
           <Button
             onClick={register}
             type="submit"
@@ -185,17 +182,18 @@ function SignUp() {
             Join Now
           </Button>
           
-            <Grid item className={classes.link}>
-              <Link href="#">
+          <Grid item className={classes.link}>
+            <Link href="#">
                 Already have an account? Sign in
-              </Link>
-            </Grid>
+            </Link>
+          </Grid>
           
           
         </form>
       </div>
-    </Box>
-  // </div>
+    </div>
+  
+ 
   );
 }
 export default SignUp;

@@ -3,37 +3,18 @@ import './App.css';
 import Login from './login';
 import SignUp from './signUp';
 import Courses from './Courses';
-import Trial from './trial';
 import Tutorial from './Tutorial';
-import "./tuto_style.css";
-
-
-
+import Trial from './trial';
 
 function App(){
   return(
     <div className="App">
-        {/* <SignUp /> */}
-        <Tutorial embedId='rtOvBOTyX00' />
-        
-      
-    {/* <Router>
-      <nav>
-        <Link to='/signup'>SignUp</Link>
-        <br></br>
-        <Link to='/login'>Login</Link>
-      </nav>
-      <Routes>
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/login" element={<Login />} />
-      </Routes> 
-    </Router> */}
+      <Courses />
     </div>
   );
 }
 
 export default App;
-
 
 
 

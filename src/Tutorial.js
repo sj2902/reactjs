@@ -2,14 +2,33 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Box from  '@material-ui/core/Box';
+import { makeStyles } from '@material-ui/core/Styles';
 
+const tutorialStyles = makeStyles((theme) => ({
+    outer: {
+        height: '100vh',
+        width: '100vw',
+        backgroundColor: 'yellow',
+    },
+    video_responsive: {
+        alignItems: 'center',
+        fontSize: 'medium',
+    },
+    title: {
+        padding: '1%',
+    },
+    description: {
+        padding: '1em',
+    },
+}));
 
 const Tutorial = ({embedId}) => {
+    const classes = tutorialStyles();
     return(
-        <div>
-        <h1 >Sign</h1>
-        <h3>sign for "" in Indian Sign Language</h3>
-        <div className='video-responsive'>    
+        <div className={classes.outer}>
+        <h1 className={classes.title} >Sign</h1>
+        <h3 className={classes.description}>sign for "" in Indian Sign Language</h3>
+        <div className={classes.video_responsive}>    
             <iframe
             src={`https://www.youtube.com/embed/${embedId}`} 
             allowfullscreen>
@@ -31,13 +50,3 @@ Tutorial.propTypes = {
 
 
 export default Tutorial;
-
-{/* <iframe
-                width="853"
-                height="480"
-                src={'https://www.youtube.com/embed/${embedId}'}
-                frameBorder="0"
-                allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-                allowFullScreen
-                title='tutorial video'
-                /> */}

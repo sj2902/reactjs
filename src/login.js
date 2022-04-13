@@ -2,20 +2,26 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import Link from '@material-ui/core/Link';
+ 
+
+
+
 
 
 const loginStyles = makeStyles((theme) => ({
-  main: {
+  
+  outer: {
     display: 'flex',
-    backgroundColor: '#ded9d9',
     justifyContent: "center",
-    alignItems: 'center',
+    alignItems: 'center', 
+    backgroundColor: '#ded9d9',
     height: '100vh',
+    width: '100vw',
   },
   
   paper: {
@@ -51,15 +57,18 @@ const loginStyles = makeStyles((theme) => ({
     color: 'black',
   },
   link: {
+    
     marginTop: '4%',
     marginLeft: '15%',
-    marginRight: '15%',
+    marginRight: '27%',
     color: 'black',
   }
 }));
 
 function Login() {
   const classes = loginStyles();
+  
+
   // const initialValues = {email: "" , password: ""};
   // const [formValues, setFormValues] = useState(initialValues);
   // const [formErrors, setFormErrors] = useState({});
@@ -80,15 +89,16 @@ function Login() {
 
 
   return (
-    <Container className={classes.main} component="main" maxWidth="xs">
-      <CssBaseline />
+    <div className={classes.outer}  maxWidth="xs">
+      <CssBaseline/>
       <div className={classes.paper}>
         <div className={classes.title}>
         <Typography component="h1" variant="h5">
-         Log In
+         Login
         </Typography>
         </div>
         <form className={classes.form} noValidate>
+          
           <Grid  container spacing={2}>
             
             <Grid item xs={12}>
@@ -122,6 +132,7 @@ function Login() {
             </Grid>
         
           </Grid>
+           
           <Button
             type="submit"
             variant="contained"
@@ -129,17 +140,22 @@ function Login() {
           >
               Log In
           </Button>
+           
           
           <Grid container justifyContent="flex-end">
             <Grid item className={classes.link}>
-              <Link to='/signUp' variant="body2">
+ 
+              <a href="#">
                 Don't have an account? sign up
-              </Link>
+              </a>
             </Grid>
           </Grid>
         </form>
+
+
       </div>
-    </Container>
+    </div>
+    
   );
 }
 export default Login;
