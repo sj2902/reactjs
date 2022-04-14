@@ -1,161 +1,72 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
- 
+import Webcam from 'react-webcam'; 
 
-
-
-
-
-const loginStyles = makeStyles((theme) => ({
+const WebcamStreamCapture = () => {
+    const webcamRef = React.useRef(null);
+    const mediaRecorderRef = React.useRef(null);
+    const [capturing, setCapturing] = React.useState(false);
+    const [recordedChunks, setRecordedChunks] = React.useState([]);
   
-  outer: {
-    display: 'flex',
-    justifyContent: "center",
-    alignItems: 'center', 
-    backgroundColor: '#ded9d9',
-    height: '100vh',
-    width: '100vw',
-  },
+    const handleStartCaptureClick = React.useCallback(() => {
+      setCapturing(true);
+      mediaRecorderRef.current = new MediaRecorder(webcamRef.current.stream, {
+        mimeType: "video/webm"
+      });
+      mediaRecorderRef.current.addEventListener(
+        "dataavailable",
+        handleDataAvailable
+      );
+      mediaRecorderRef.current.start();
+    }, [webcamRef, setCapturing, mediaRecorderRef]);
   
-  paper: {
-    color: 'black',
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    
-  },
-  title: {
-    margin: 0,
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-    backgroundColor: '#D2938F',
-    width: '50%',
-    marginLeft: '25%',
-    marginRight: '25%',
-    marginTop: '5%'
-    
-  },
-  detail: {
-    backgroundColor: 'white',
-    color: 'black',
-  },
-  link: {
-    
-    marginTop: '4%',
-    marginLeft: '15%',
-    marginRight: '27%',
-    color: 'black',
-  }
-}));
-
-function Trial() {
-  const classes = loginStyles();
+    const handleDataAvailable = React.useCallback(
+      ({ data }) => {
+        if (data.size > 0) {
+          setRecordedChunks((prev) => prev.concat(data));
+        }
+      },
+      [setRecordedChunks]
+    );
   
+    const handleStopCaptureClick = React.useCallback(() => {
+      mediaRecorderRef.current.stop();
+      setCapturing(false);
+    }, [mediaRecorderRef, webcamRef, setCapturing]);
+  
+    const handleDownload = React.useCallback(() => {
+      if (recordedChunks.length) {
+        const blob = new Blob(recordedChunks, {
+          type: "video/webm"
+        });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        document.body.appendChild(a);
+        a.style = "display: none";
+        a.href = url;
+        a.download = "react-webcam-stream-capture.webm";
+        a.click();
+        window.URL.revokeObjectURL(url);
+        setRecordedChunks([]);
+      }
+    }, [recordedChunks]);
+  
+    return (
+      <>
+        <Webcam audio={false} ref={webcamRef} />
+        {capturing ? (
+          <button onClick={handleStopCaptureClick}>Stop Capture</button>
+        ) : (
+          <button onClick={handleStartCaptureClick}>Start Capture</button>
+        )}
+        {recordedChunks.length > 0 && (
+          <button onClick={handleDownload}>Download</button>
+        )}
+      </>
+    );
+  };
+  
+  export default WebcamStreamCapture;
 
-  // const initialValues = {email: "" , password: ""};
-  // const [formValues, setFormValues] = useState(initialValues);
-  // const [formErrors, setFormErrors] = useState({});
-  // const handleChange = (e) => {
-  //   console.log(e.target);
-  //   const {name, value} =e.target;
-  //   setFormValues({...formValues, name: value});
-  //   console.log(formValues);
-  // }
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   setFormErrors(validate(formValues));
-  // }
-  // const validate = (values) => {
-  //   const errors = {}
-  //   const regex = 
-  // }
-
-
-  return (
-    <div className={classes.outer}  maxWidth="xs">
-      <CssBaseline/>
-      <div className={classes.paper}>
-        <div className={classes.title}>
-        <Typography component="h1" variant="h5">
-         Login
-        </Typography>
-        </div>
-        <form className={classes.form} noValidate>
-          
-          <Grid  container spacing={2}>
-            
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                className= {classes.detail}
-                // value={formValues.email}
-                // onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                className= {classes.detail}
-                // value={formValues.password}
-                // onChange={handleChange}
-              />
-            </Grid>
-        
-          </Grid>
-           
-          <Button
-            type="submit"
-            variant="contained"
-            className={classes.submit}
-          >
-              Log In
-          </Button>
-           
-          
-          <Grid container justifyContent="flex-end">
-            <Grid item className={classes.link}>
- 
-              <a href="#">
-                Don't have an account? sign up
-              </a>
-            </Grid>
-          </Grid>
-        </form>
-
-
-      </div>
-    </div>
-    
-  );
-}
-export default Trial;
+//   ReactDOM.render(<WebcamStreamCapture />, document.getElementById("root"));
+  
+  // https://www.npmjs.com/package/react-webcam

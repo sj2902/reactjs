@@ -1,24 +1,18 @@
 import React from 'react';
-import ImageList from '@material-ui/core/ImageList';
-import ImageListItem from '@material-ui/core/ImageListItem';
-import Container from '@material-ui/core/Container';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import {Link} from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import FormLabel from '@material-ui/core/FormLabel';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import Radio from '@material-ui/core/Radio';
-import Paper from '@material-ui/core/Paper';
+import {Link} from 'react-router-dom';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import GradeIcon from '@material-ui/icons/Grade';
 
 
 
 const courseStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
+        minWidth: '300px',
     },
     paper: {
         height: '220px',
@@ -39,29 +33,54 @@ const courseStyles = makeStyles((theme) => ({
         marginBottom: '6%',
         
     },
-    back: {
-        textAlign: 'right',
-        marginRight: '2%',
-        marginTop: '2%',
-        marginBottom: '2%',
-        
-    },
-    look: {
-        backgroundColor: '#fc12fc',
-    },
+
+
+    buttons: {
+        padding: '2%',
+        backgroundColor: 'aquamarine',
+        display: 'flex',
+        justifyContent: 'center',
+        gap: '900px'
+    }
+    
 })
 );
 function Courses() {
-    const [spacing, setSpacing] = React.useState(10);
+    const [spacing,] = React.useState(10);
     const classes = courseStyles();
 
     
     
     return(
-        <div className={classes.outer} component="main" maxWidth="xs">
+        <div className={classes.outer} component="main">
+
+        <div className={classes.buttons}>
         
         <div className={classes.back}>
-        <Button  size='small' variant='contained' className={classes.look}>Log Out</Button>
+            <Link to="/achievements">
+                <Button 
+                    variant="contained"
+                    color="secondary"
+                    startIcon={<GradeIcon />}
+                >
+                    Achievements
+                </Button>
+            </Link>
+        </div>
+
+        <div className={classes.back}>
+            <Link to="/login">
+                <Button 
+                    size='small'
+                    variant='contained'
+                    color="primary"
+                    endIcon={<ExitToAppIcon />} 
+                >
+                    Log Out
+                </Button> 
+            </Link>
+        </div>
+
         </div>
 
         <div className={classes.title}>
@@ -77,8 +96,9 @@ function Courses() {
           {[0].map((value) => (
             
             <Grid key={value} item >
-                
-                    <img src='https://source.unsplash.com/Rd01U0tPmQI' className={classes.paper}></img>
+                    <Link to="/tutorial">
+                    <img src='https://source.unsplash.com/Rd01U0tPmQI' alt="img" className={classes.paper}></img>
+                    </Link>
                     <Typography  variant="h6">
                         Alphabets
                     </Typography>
@@ -87,8 +107,9 @@ function Courses() {
            {[0].map((value) => (
             
             <Grid key={value} item >
-                
-                    <img src='https://source.unsplash.com/GQ327RPuxhI' className={classes.paper}></img>
+                    <Link to="/tutorial">
+                    <img src='https://source.unsplash.com/GQ327RPuxhI' alt="img" className={classes.paper}></img>
+                    </Link>
                     <Typography  variant="h6">
                         Numbers
                     </Typography>
@@ -99,8 +120,9 @@ function Courses() {
            {[0].map((value) => (
             
             <Grid key={value} item >
-                
-                    <img src='https://source.unsplash.com/dCC7LtjU1WA' className={classes.paper}></img>
+                    <Link to="/tutorial">
+                    <img src='https://source.unsplash.com/dCC7LtjU1WA' alt="img" className={classes.paper}></img>
+                    </Link>
                     <Typography  variant="h6">
                         Week Days
                     </Typography>
@@ -111,8 +133,9 @@ function Courses() {
            {[0].map((value) => (
             
             <Grid key={value} item >
-                
-                    <img src='https://source.unsplash.com/qQWV91TTBrE' className={classes.paper}></img>
+                    <Link to="/tutorial">
+                    <img src='https://source.unsplash.com/qQWV91TTBrE' alt="img" className={classes.paper}></img>
+                    </Link>
                     <Typography  variant="h6">
                         Animals
                     </Typography>
@@ -123,8 +146,9 @@ function Courses() {
            {[0].map((value) => (
             
             <Grid key={value} item >
-                
-                    <img src='https://source.unsplash.com/HlNcigvUi4Q' className={classes.paper}></img>
+                    <Link to="/tutorial">
+                    <img src='https://source.unsplash.com/HlNcigvUi4Q' alt="img" className={classes.paper}></img>
+                    </Link>
                     <Typography  variant="h6">
                         Food
                     </Typography>
@@ -135,8 +159,9 @@ function Courses() {
            {[0].map((value) => (
             
             <Grid key={value} item >
-                
-                    <img src='https://source.unsplash.com/aqpRqg_jI3c' className={classes.paper}></img>
+                    <Link to="/tutorial">
+                    <img src='https://source.unsplash.com/aqpRqg_jI3c' alt="img" className={classes.paper}></img>
+                    </Link>
                     <Typography  variant="h6">
                         Directions
                     </Typography>
@@ -154,31 +179,5 @@ function Courses() {
     );
 }
 
-const itemData = [
-    {
-      img: 'https://source.unsplash.com/Rd01U0tPmQI',
-      title: 'Alphabets',
-    },
-    {
-        img: 'https://source.unsplash.com/GQ327RPuxhI',
-        title: 'Numbers',
-    },
-    {
-        img: 'https://source.unsplash.com/dCC7LtjU1WA',
-        title: 'week',
-    },
-    {
-        img: 'https://source.unsplash.com/qQWV91TTBrE',
-        title: 'animals',
-    },
-    {
-        img: 'https://source.unsplash.com/HlNcigvUi4Q',
-        title: 'food',
-    },
-    {
-        img: 'https://source.unsplash.com/aqpRqg_jI3c',
-        title: 'directions',
-    },
-  ];
 
 export default Courses;

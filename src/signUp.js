@@ -2,14 +2,14 @@ import{useState} from 'react';
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
+import {Link} from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
 import { collection, addDoc } from "firebase/firestore"; 
 import db from "./firebase";
-import Container from "@material-ui/core/Container";
+
 
 
 
@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
     height: '100vh',
     width: '100vw',
     backgroundColor: '#7E8BFF',
+    
   },
   paper: {
     color: 'black',
@@ -30,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    minWidth: '900px',
   },
   title: {
     margin: 0,
@@ -86,7 +88,7 @@ function SignUp() {
   const classes = useStyles();
   return (
     
-    <div className={classes.outer} maxWidth="xs" >
+    <div className={classes.outer} >
       <div className={classes.paper}>
         <div className={classes.title}>
         <Typography component="h2" variant="h5">
@@ -172,18 +174,19 @@ function SignUp() {
             </Grid>
           </Grid>
 
-
-          <Button
-            onClick={register}
-            type="submit"
-            variant="contained"
-            className={classes.submit}
-          >
-            Join Now
-          </Button>
+          
+            <Button
+              onClick={register}
+              type="submit"
+              variant="contained"
+              className={classes.submit}
+            >
+              Join Now
+            </Button>
+          
           
           <Grid item className={classes.link}>
-            <Link href="#">
+            <Link to='/login'>
                 Already have an account? Sign in
             </Link>
           </Grid>

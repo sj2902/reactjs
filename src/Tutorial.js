@@ -30,6 +30,7 @@ const Tutorial = ({embedId}) => {
         <h3 className={classes.description}>sign for "" in Indian Sign Language</h3>
         <div className={classes.video_responsive}>    
             <iframe
+            title='video'
             src={`https://www.youtube.com/embed/${embedId}`} 
             allowfullscreen>
             </iframe>    

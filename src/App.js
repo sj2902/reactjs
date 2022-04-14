@@ -4,12 +4,35 @@ import Login from './login';
 import SignUp from './signUp';
 import Courses from './Courses';
 import Tutorial from './Tutorial';
-import Trial from './trial';
+import About from './About';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import Achievements from './Achievements';
+import Certificate from './Certificate';
+import Assessment from './Assessment';
+import WebcamStreamCapture from './trial';
 
 function App(){
   return(
     <div className="App">
-      <Courses />
+      
+      
+      <Router>
+
+        <Routes>
+
+          <Route path="/" element={<About />} />
+          <Route path='/signup' element={<SignUp />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/courses' element={<Courses />} />
+          <Route path='/tutorial' element={<Tutorial embedId='rtOvBOTyX00'/>} />
+          <Route path="/achievements" element={<Achievements />} />
+          <Route path="/certificate" element={<Certificate />} />
+          <Route path="/assessment" element={<Assessment />} />
+          <Route path="/trial" element={<WebcamStreamCapture />} />
+          
+        </Routes>
+
+      </Router>
     </div>
   );
 }

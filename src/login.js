@@ -5,12 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
- 
-
-
-
+import {Link} from 'react-router-dom';
 
 
 const loginStyles = makeStyles((theme) => ({
@@ -22,6 +17,7 @@ const loginStyles = makeStyles((theme) => ({
     backgroundColor: '#ded9d9',
     height: '100vh',
     width: '100vw',
+    
   },
   
   paper: {
@@ -30,7 +26,7 @@ const loginStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    
+    minWidth: '200px',
   },
   title: {
     margin: 0,
@@ -89,7 +85,7 @@ function Login() {
 
 
   return (
-    <div className={classes.outer}  maxWidth="xs">
+    <div className={classes.outer}>
       <CssBaseline/>
       <div className={classes.paper}>
         <div className={classes.title}>
@@ -145,9 +141,9 @@ function Login() {
           <Grid container justifyContent="flex-end">
             <Grid item className={classes.link}>
  
-              <a href="#">
+              <Link to="/signup">
                 Don't have an account? sign up
-              </a>
+              </Link>
             </Grid>
           </Grid>
         </form>
