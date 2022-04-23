@@ -25,7 +25,7 @@ const courseStyles = makeStyles((theme) => ({
         backgroundColor: '#ded9d9',
         height: '250vh',
         width: '100vw',
-        overflowY: 'hidden',
+        
        
     },
     title: {
@@ -40,7 +40,13 @@ const courseStyles = makeStyles((theme) => ({
         backgroundColor: 'aquamarine',
         display: 'flex',
         justifyContent: 'center',
-        gap: '900px'
+        gap: '900px',
+
+        [theme.breakpoints.down('sm')]: {
+            display: 'grid',
+            gap: '20px',
+          },
+
     }
     
 })

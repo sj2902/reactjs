@@ -9,6 +9,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
 import { collection, addDoc } from "firebase/firestore"; 
 import db from "./firebase";
+import {useForm} from "react-hook-form";
+
 
 
 
@@ -62,7 +64,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 function SignUp() {
+
+  const { register: regUser, handleSubmit } = useForm();
+  const onSubmit = data => console.log(data);
+  
+
+
   const [firstName, setfirstName] = useState("");
   const [lastName, setlastName] = useState("");
   const [email, setemail] = useState("");
@@ -95,7 +104,7 @@ function SignUp() {
           Sign Up
         </Typography>
         </div>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
           <Grid  container spacing={2}>
             <Grid item xs={12}>
               <TextField
@@ -111,7 +120,9 @@ function SignUp() {
                   setfirstName(event.target.value);
                 }}
                 autoFocus
+                {...regUser("firstName", {required: true})}
               />
+              
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -126,6 +137,7 @@ function SignUp() {
                 onChange={(event) => {
                   setlastName(event.target.value);
                 }}
+                {...regUser("lastName", {required: true})}
               />
             </Grid>
             <Grid item xs={12}>
@@ -141,6 +153,9 @@ function SignUp() {
                 onChange={(event) => {
                   setemail(event.target.value);
                 }}
+
+                {...regUser("email", {required: true})}
+
               />
             </Grid>
             <Grid item xs={12}>
@@ -157,6 +172,10 @@ function SignUp() {
                 onChange={(event) => {
                   setpassword(event.target.value);
                 }}
+
+                {...regUser("password", {required: true, minLength: 10})}
+
+
               />
             </Grid>
             <Grid item xs={12}>
@@ -170,6 +189,7 @@ function SignUp() {
                 id="Cpassword"
                 autoComplete="current-password"
                 className={classes.detail}
+                {...regUser("Cpassword", {required: true, minLength: 10})}
               />
             </Grid>
           </Grid>
@@ -177,6 +197,7 @@ function SignUp() {
           
             <Button
               onClick={register}
+              
               type="submit"
               variant="contained"
               className={classes.submit}

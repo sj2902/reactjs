@@ -8,8 +8,8 @@ import About from './About';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Achievements from './Achievements';
 import Certificate from './Certificate';
-import Assessment from './Assessment';
-import WebcamStreamCapture from './trial';
+
+import WebcamStreamCapture from './Assessment';
 
 function App(){
   return(
@@ -27,8 +27,8 @@ function App(){
           <Route path='/tutorial' element={<Tutorial embedId='rtOvBOTyX00'/>} />
           <Route path="/achievements" element={<Achievements />} />
           <Route path="/certificate" element={<Certificate />} />
-          <Route path="/assessment" element={<Assessment />} />
-          <Route path="/trial" element={<WebcamStreamCapture />} />
+          <Route path="/assessment" element={<WebcamStreamCapture />} />
+          
           
         </Routes>
 
