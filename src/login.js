@@ -1,3 +1,4 @@
+import{useState} from 'react';
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -6,6 +7,26 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import {Link} from 'react-router-dom';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import {useForm} from 'react-hook-form';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 const loginStyles = makeStyles((theme) => ({
@@ -63,25 +84,29 @@ const loginStyles = makeStyles((theme) => ({
 
 function Login() {
   const classes = loginStyles();
+
+
   
 
-  // const initialValues = {email: "" , password: ""};
-  // const [formValues, setFormValues] = useState(initialValues);
-  // const [formErrors, setFormErrors] = useState({});
-  // const handleChange = (e) => {
-  //   console.log(e.target);
-  //   const {name, value} =e.target;
-  //   setFormValues({...formValues, name: value});
-  //   console.log(formValues);
-  // }
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   setFormErrors(validate(formValues));
-  // }
-  // const validate = (values) => {
-  //   const errors = {}
-  //   const regex = 
-  // }
+
+
+
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+
+
+  const onF = () => [setLoginEmail, setLoginPassword];
+
+  const Signin = async(e) => {
+    const authentication = getAuth();
+    e.preventDefault()
+    
+    signInWithEmailAndPassword(authentication, loginEmail, loginPassword)
+    .then((response)=>{
+      console.log(response)
+    })
+  }  
+  
 
 
   return (
@@ -93,28 +118,48 @@ function Login() {
          Login
         </Typography>
         </div>
-        <form className={classes.form} noValidate>
+        <form className={classes.form}>
+        {/* <form className={classes.form} noValidate 
+              onSubmit={handleSubmit(onSubmit)}> */}
           
           <Grid  container spacing={2}>
             
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
-                required
+                value={loginEmail}
                 fullWidth
                 id="email"
                 label="Email Address"
                 name="email"
                 autoComplete="email"
                 className= {classes.detail}
-                // value={formValues.email}
-                // onChange={handleChange}
+                onClick={onF}
+
+                onChange={(event) => {
+                  setLoginEmail(event.target.value);
+                }}
+                
+
+                // {...register("email", {required: true,
+                //     pattern: /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/
+                //   // pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                // })}
+                
+
+
+
               />
+            {/* {errors.email && <p >mandatory field. Also check the email format</p>} */}
+
+            {loginEmail ? null 
+                  : <div className={classes.message}>Mandatory Field</div>
+                }
             </Grid>
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
-                required
+                value={loginPassword}
                 fullWidth
                 name="password"
                 label="Password"
@@ -122,14 +167,30 @@ function Login() {
                 id="password"
                 autoComplete="current-password"
                 className= {classes.detail}
-                // value={formValues.password}
-                // onChange={handleChange}
+
+
+                onChange={(event) => {
+                  setLoginPassword(event.target.value);
+                }}
+                
+                // {...register("password", {required: true, pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$/})}
+
+
+
+
               />
+              {loginPassword ? null 
+                  : <div className={classes.message}>Mandatory Field</div>
+                }
             </Grid>
-        
+            {/* {errors.password && <p>should contain one Capital Letter, one Small Letter, and the number of characters should be between 8 to 15</p>} */}
           </Grid>
            
           <Button
+            onClick={Signin}
+
+
+
             type="submit"
             variant="contained"
             className={classes.submit}

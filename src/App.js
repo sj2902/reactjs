@@ -8,7 +8,6 @@ import About from './About';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Achievements from './Achievements';
 import Certificate from './Certificate';
-
 import WebcamStreamCapture from './Assessment';
 
 function App(){
