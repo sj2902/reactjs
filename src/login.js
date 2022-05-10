@@ -8,22 +8,13 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import {Link} from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import {useForm} from 'react-hook-form';
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+import { useAlert } from "react-alert";
+import Navbar from "./navLogin";
+import Courses from "./Courses";
+import { Navigate } from "react-router-dom";
+import SignUp from "./signUp";
+import firebase from './firebase';
 
 
 
@@ -82,20 +73,19 @@ const loginStyles = makeStyles((theme) => ({
   }
 }));
 
-function Login() {
+const Login = () => {
   const classes = loginStyles();
 
 
-  
+  const alert = useAlert();
 
 
 
+  const [loginEmail, setLoginEmail] = React.useState("");
+  const [loginPassword, setLoginPassword] = React.useState("");
 
-  const [loginEmail, setLoginEmail] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
-
-
-  const onF = () => [setLoginEmail, setLoginPassword];
+  let errMsg;
+ 
 
   const Signin = async(e) => {
     const authentication = getAuth();
@@ -103,14 +93,54 @@ function Login() {
     
     signInWithEmailAndPassword(authentication, loginEmail, loginPassword)
     .then((response)=>{
-      console.log(response)
+      console.log(response);
+      
+      
     })
-  }  
+    .catch((error) => {
+      if(error.code === 'auth/wrong-password'){
+        alert.error('Please check the Password');
+      }
+      if(error.code === 'auth/user-not-found'){
+        alert.error('Please check the Email');
+      }
+    })
+    
+
+
+    const emailInput = document.querySelector("#email");
+  const passwordInput = document.querySelector("#password");
+
+    if (!loginEmail) {
+      alert.error("Please enter your your email address");
+      emailInput.focus();
+      errMsg = false;
+    } 
+    else if (loginPassword === "") {
+      alert.error("Please enter your password!");
+      passwordInput.focus();
+      errMsg = false;
+    }
+    
+   
+
+    
+    return errMsg;
+  };
+
+
+   
   
 
 
   return (
+    <div>
+    <div>
+      <Navbar/>
+    </div>
+    
     <div className={classes.outer}>
+    
       <CssBaseline/>
       <div className={classes.paper}>
         <div className={classes.title}>
@@ -118,23 +148,26 @@ function Login() {
          Login
         </Typography>
         </div>
-        <form className={classes.form}>
+        <form className={classes.form} >
         {/* <form className={classes.form} noValidate 
               onSubmit={handleSubmit(onSubmit)}> */}
+
+          
           
           <Grid  container spacing={2}>
             
             <Grid item xs={12}>
               <TextField
+              type="email"
                 variant="outlined"
                 value={loginEmail}
                 fullWidth
                 id="email"
-                label="Email Address"
+                label="Email Address *"
                 name="email"
                 autoComplete="email"
                 className= {classes.detail}
-                onClick={onF}
+                
 
                 onChange={(event) => {
                   setLoginEmail(event.target.value);
@@ -152,9 +185,7 @@ function Login() {
               />
             {/* {errors.email && <p >mandatory field. Also check the email format</p>} */}
 
-            {loginEmail ? null 
-                  : <div className={classes.message}>Mandatory Field</div>
-                }
+            
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -162,7 +193,7 @@ function Login() {
                 value={loginPassword}
                 fullWidth
                 name="password"
-                label="Password"
+                label="Password *"
                 type="password"
                 id="password"
                 autoComplete="current-password"
@@ -179,9 +210,7 @@ function Login() {
 
 
               />
-              {loginPassword ? null 
-                  : <div className={classes.message}>Mandatory Field</div>
-                }
+              
             </Grid>
             {/* {errors.password && <p>should contain one Capital Letter, one Small Letter, and the number of characters should be between 8 to 15</p>} */}
           </Grid>
@@ -196,7 +225,9 @@ function Login() {
             className={classes.submit}
           >
               Log In
+              
           </Button>
+
            
           
           <Grid container justifyContent="flex-end">
@@ -212,7 +243,8 @@ function Login() {
 
       </div>
     </div>
-    
+    </div>
   );
 }
+
 export default Login;

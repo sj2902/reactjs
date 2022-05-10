@@ -10,18 +10,19 @@ import Achievements from './Achievements';
 import Certificate from './Certificate';
 import WebcamStreamCapture from './Assessment';
 
+
 function App(){
   return(
     <div className="App">
       
       
       <Router>
-
+        
         <Routes>
-
-          <Route path="/" element={<About />} />
+          
+          <Route path="/" element={<Login />} />
           <Route path='/signup' element={<SignUp />} />
-          <Route path='/login' element={<Login />} />
+          <Route path='/about' element={<About />} />
           <Route path='/courses' element={<Courses />} />
           <Route path='/tutorial' element={<Tutorial embedId='rtOvBOTyX00'/>} />
           <Route path="/achievements" element={<Achievements />} />

@@ -9,6 +9,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
 import { collection, addDoc } from "firebase/firestore";
 import db from "./firebase";
+import { useAlert } from "react-alert";
+import Navbar from "./navSign";
  
  
  
@@ -69,39 +71,28 @@ const useStyles = makeStyles((theme) => ({
  
  
 function SignUp() {
+
+  const alert = useAlert();
  
-  
- 
- 
- 
+
   const [firstName, setfirstName] = useState(""); 
   const [lastName, setlastName] = useState("");
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [cPass, setcPass] = useState("");
 
-  const onF = () => [setfirstName, setlastName, setemail, setpassword, setcPass];
-  
-  
+  let errMsg;
+
+
  
- 
- 
-  const regUser = async(e) => {
+  const register = async(e) => {
       const authentication = getAuth();
       e.preventDefault()
 
-
-      if((firstName && lastName && email && password && cPass) == 0) {
-        alert("check your details");
-      }
-      else if (password !== cPass){
-        alert("enter the same password for confirmation");
-      }
-      else{
         createUserWithEmailAndPassword(authentication, email, password)
         .then((response)=>{
           console.log(response)
-        })
+        });
 
         const docRef= await addDoc(collection(db, "SignUp"), {
           Firstname: firstName,
@@ -109,39 +100,68 @@ function SignUp() {
           Email: email,
           Password: password,
           Confirm_Password: cPass,
-        });
+        });      
 
-        console.log(firstName);
-        console.log(lastName);
-        console.log(email);
-        console.log(password);
-        console.log(cPass);
-        console.log("Document written with ID: ", docRef.id);
+      const fName = document.querySelector('#firstName1');
+      const lName = document.querySelector('#lastName1');
+      const u_email = document.querySelector("#email1");
+      const u_password = document.querySelector("#password1");
+      const u_cPass = document.querySelector('#Cpassword1');
 
-        alert("submitted");
+    if (!firstName) {
+      alert.error("Please input your first name");
+      fName.focus();
+      errMsg = false;
+    } 
+    else if(!lastName){
+      alert.error("Please input your last name");
+      lName.focus();
+      errMsg = false;
+    }
+    else if(!email){
+      alert.error("Please input your email");
+      u_email.focus();
+      errMsg = false;
+    }
+    else if (password === "") {
+      alert.error("Please provide your password!");
+      u_password.focus();
+      errMsg = false;
+    }
+    else if (password.value <= 7) {
+      alert.error("Your password must have 8 characters or greater");
+      u_password.focus();
+      errMsg = false;
+    }
+    else if (cPass === ""){
+      alert.error("Please provide your password!");
+      u_cPass.focus();
+      errMsg = false;
+    }
+    else if (
+      typeof password !== "undefined" && 
+      typeof cPass !== "undefined"
+    ) {
+      if (password != cPass) {
+          alert.error("Passwords don't match");
+          u_cPass.focus();
+          errMsg = false;
       }
-
-
-      
-      
-      
-      // if (password === cPass) {
-      //   alert("matched");
-      // }
-      // else{ 
-      //    alert("confirm password should match password");
-      // } 
-
-
-    
-    
+    }
+    else {
+      alert.success("You've signed up successfully. Proceed to login");
+      errMsg = true;
+    }
+    return errMsg;
   };
 
-
- 
-  
+   
   const classes = useStyles();
   return (
+    <div>
+    <div>
+      <Navbar/>
+    </div>
    
     <div className={classes.outer} >
       <div className={classes.paper}>
@@ -154,8 +174,6 @@ function SignUp() {
        
  
         <form className={classes.form} >
- 
- 
  
           <Grid  container spacing={2}>
             <Grid item xs={12} >
@@ -170,11 +188,6 @@ function SignUp() {
                 
                 className={classes.detail}
 
-                onClick={onF}
-
-
-
-
                 onChange={(event) => {
                   
                   setfirstName(event.target.value);
@@ -184,9 +197,6 @@ function SignUp() {
                 autoFocus
                 // {...register("firstName", {required: true})}
               />
-                {firstName ? null 
-                  : <div className={classes.message}>Mandatory Field</div>
-                }
               
              
             </Grid>
@@ -204,15 +214,8 @@ function SignUp() {
                   setlastName(event.target.value);
                 }}
 
-
-
-
-                onClick={onF}
-                // {...register("lastName", {required: true})}
               />
-              {lastName ? null 
-                  : <div className={classes.message}>Mandatory Field</div>
-                }
+              
               
             </Grid>
             <Grid item xs={12}>
@@ -229,12 +232,9 @@ function SignUp() {
                   setemail(event.target.value);
                 }}
  
-                // {...register("email", {required: true})}
-                onClick={onF}
+                
               />
-              {email ? null 
-                  : <div className={classes.message}>Mandatory Field</div>
-                }
+              
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -251,13 +251,8 @@ function SignUp() {
                   setpassword(event.target.value);
                 }}
  
-                // {...register("password", {required: true, minLength: 10})}
- 
-                onClick={onF}
               />
-              {password ? null 
-                  : <div className={classes.message}>Mandatory Field</div>
-                }
+              
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -273,18 +268,15 @@ function SignUp() {
                 onChange={(event) => {
                   setcPass(event.target.value);
                 }}
-                onClick={onF}
-                // {...register("Cpass", {required: true, minLength: 10})}
+              
               />
-              {cPass ? null 
-                  : <div className={classes.message}>Mandatory Field</div>
-                }
+              
             </Grid>
           </Grid>
  
          
             <Button
-              onClick={regUser}
+              onClick={register}
               
               
               type="submit"
@@ -296,7 +288,7 @@ function SignUp() {
          
          
           <Grid item className={classes.link}>
-            <Link to='/login'>
+            <Link to='/'>
                 Already have an account? Sign in
             </Link>
           </Grid>
@@ -306,7 +298,7 @@ function SignUp() {
       </div>
     </div>
  
- 
+  </div>
   );
 }
 export default SignUp;

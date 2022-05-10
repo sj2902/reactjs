@@ -1,11 +1,10 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import {Link} from 'react-router-dom';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import GradeIcon from '@material-ui/icons/Grade';
+import Navbar from './navCourses';
 
 
 
@@ -58,36 +57,14 @@ function Courses() {
     
     
     return(
+        <div>
+            <div>
+                <Navbar />
+            </div>
+        
         <div className={classes.outer} component="main">
 
-        <div className={classes.buttons}>
         
-        <div className={classes.back}>
-            <Link to="/achievements">
-                <Button 
-                    variant="contained"
-                    color="secondary"
-                    startIcon={<GradeIcon />}
-                >
-                    Achievements
-                </Button>
-            </Link>
-        </div>
-
-        <div className={classes.back}>
-            <Link to="/login">
-                <Button 
-                    size='small'
-                    variant='contained'
-                    color="primary"
-                    endIcon={<ExitToAppIcon />} 
-                >
-                    Log Out
-                </Button> 
-            </Link>
-        </div>
-
-        </div>
 
         <div className={classes.title}>
             <Typography component="h1" variant="h5">
@@ -181,6 +158,7 @@ function Courses() {
 
 
 
+        </div>
         </div>
     );
 }

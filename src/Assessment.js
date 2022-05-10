@@ -1,7 +1,31 @@
 import React from 'react';
 import Webcam from 'react-webcam'; 
+import { makeStyles } from '@material-ui/core/styles';
+import Navbar from './Navbar';
+
+
+const assessStyles = makeStyles((theme) => ({
+  
+  outer: {
+    display: 'grid',
+    justifyContent: 'center',
+    backgroundColor: '#ded9d9',
+    height: '100vh',
+    width: '100vw',
+  },
+}));
+
+
+
+
 
 const WebcamStreamCapture = () => {
+
+  const classes = assessStyles();
+
+
+
+
     const webcamRef = React.useRef(null);
     const mediaRecorderRef = React.useRef(null);
     const [capturing, setCapturing] = React.useState(false);
@@ -51,17 +75,25 @@ const WebcamStreamCapture = () => {
     }, [recordedChunks]);
   
     return (
-      <>
-        <Webcam audio={false} ref={webcamRef} />
-        {capturing ? (
-          <button onClick={handleStopCaptureClick}>Stop Capture</button>
-        ) : (
-          <button onClick={handleStartCaptureClick}>Start Capture</button>
-        )}
-        {recordedChunks.length > 0 && (
-          <button onClick={handleDownload}>Download</button>
-        )}
-      </>
+      
+      <div className={classes.outer}>
+        <div>
+          <Navbar />
+        </div>
+        <div className={classes.camera}>
+          <Webcam audio={false} ref={webcamRef} />
+          
+          {capturing ? (
+            <button onClick={handleStopCaptureClick}>Stop Capture</button>
+          ) : (
+            <button onClick={handleStartCaptureClick}>Start Capture</button>
+          )}
+          {recordedChunks.length > 0 && (
+            <button onClick={handleDownload}>Download</button>
+          )}
+        </div>
+      </div>
+      
     );
   };
   

@@ -1,6 +1,7 @@
 import { Button, makeStyles } from '@material-ui/core';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Navbar from './Navbar';
 
 const styles = makeStyles((theme) => ({
     outer: {
@@ -34,7 +35,14 @@ const styles = makeStyles((theme) => ({
 function Certificate(){
     const classes= styles();
     return(
+
+        
+            
         <div className={classes.outer}>
+            <div>
+                <Navbar />
+            </div>
+        
             <h1 className={classes.content}>Congratulations on completing this tutorial</h1>
             <div className={classes.buttons}>
                 <Link to="/achievements">
@@ -44,6 +52,7 @@ function Certificate(){
                 
             </div>
         </div>
+        
     );
 }
 
