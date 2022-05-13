@@ -3,8 +3,8 @@ import './App.css';
 import Login from './login';
 import SignUp from './signUp';
 import Courses from './Courses';
-import Trial from './trial';
-import Tutorial from './Tutorial';
+import PersistentDrawerRight from './Alphabet';
+import PersistentDrawer from './Number';
 import "./tuto_style.css";
 
 
@@ -14,7 +14,7 @@ function App(){
   return(
     <div className="App">
         {/* <SignUp /> */}
-        <Tutorial embedId='rtOvBOTyX00' />
+        <PersistentDrawer />
         
       
     {/* <Router>
@@ -33,6 +33,13 @@ function App(){
 }
 
 export default App;
+
+
+
+
+
+
+
 
 
 

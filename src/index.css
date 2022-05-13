@@ -26,3 +26,11 @@ nav{
   background-color: white;
   text-align: right;
 }
+* {
+  box-sizing: border-box;
+}
+
+#page-wrap {
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
