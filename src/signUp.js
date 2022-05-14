@@ -2,7 +2,7 @@ import{useState} from 'react';
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
@@ -71,6 +71,7 @@ const useStyles = makeStyles((theme) => ({
  
  
 function SignUp() {
+  const navigate = useNavigate();
 
   const alert = useAlert();
  
@@ -147,10 +148,12 @@ function SignUp() {
           u_cPass.focus();
           errMsg = false;
       }
-    }
-    else {
-      alert.success("You've signed up successfully. Proceed to login");
-      errMsg = true;
+    
+      else {
+        navigate("/");
+        alert.show("You've signed up successfully. Proceed to login");
+        errMsg = true;
+      }
     }
     return errMsg;
   };

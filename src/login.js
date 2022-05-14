@@ -1,4 +1,4 @@
-import{useState} from 'react';
+
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -11,10 +11,9 @@ import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 import { useAlert } from "react-alert";
 import Navbar from "./navLogin";
-import Courses from "./Courses";
-import { Navigate } from "react-router-dom";
-import SignUp from "./signUp";
-import firebase from './firebase';
+
+import { useNavigate} from "react-router-dom";
+
 
 
 
@@ -74,7 +73,10 @@ const loginStyles = makeStyles((theme) => ({
 }));
 
 const Login = () => {
+  const navigate = useNavigate();
   const classes = loginStyles();
+
+  
 
 
   const alert = useAlert();
@@ -120,6 +122,9 @@ const Login = () => {
       alert.error("Please enter your password!");
       passwordInput.focus();
       errMsg = false;
+    }
+    else{
+      navigate("/courses");
     }
     
    
