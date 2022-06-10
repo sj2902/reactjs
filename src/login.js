@@ -1,18 +1,15 @@
-
-import React from 'react';
+import React, {createContext} from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import {Link} from 'react-router-dom';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-
+import {Link, useLocation} from 'react-router-dom';
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import { useAlert } from "react-alert";
-import Navbar from "./navLogin";
-
 import { useNavigate} from "react-router-dom";
+import Courses from "./Courses";
 
 
 
@@ -72,32 +69,61 @@ const loginStyles = makeStyles((theme) => ({
   }
 }));
 
+
+
 const Login = () => {
   const navigate = useNavigate();
   const classes = loginStyles();
-
-  
-
-
   const alert = useAlert();
-
-
+  
 
   const [loginEmail, setLoginEmail] = React.useState("");
   const [loginPassword, setLoginPassword] = React.useState("");
-
+  
   let errMsg;
- 
 
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+ 
   const Signin = async(e) => {
     const authentication = getAuth();
     e.preventDefault()
+
+    const user = authentication.currentUser;
+    if (user !== null) {
+    // The user object has basic properties such as display name, email, etc.
+    const displayName = user.displayName;
+    const email = user.email;
+    const photoURL = user.photoURL;
+    const emailVerified = user.emailVerified;
+
+    // The user's ID, unique to the Firebase project. Do NOT use
+    // this value to authenticate with your backend server, if
+    // you have one. Use User.getToken() instead.
+    const uid = user.uid;
+
+    navigate("/achievements");
+    console.log(email);
     
+    return;
+
+    }
+     
     signInWithEmailAndPassword(authentication, loginEmail, loginPassword)
     .then((response)=>{
       console.log(response);
-      
-      
     })
     .catch((error) => {
       if(error.code === 'auth/wrong-password'){
@@ -108,13 +134,13 @@ const Login = () => {
       }
     })
     
-
+    
 
     const emailInput = document.querySelector("#email");
   const passwordInput = document.querySelector("#password");
 
     if (!loginEmail) {
-      alert.error("Please enter your your email address");
+      alert.error("Please enter your email address");
       emailInput.focus();
       errMsg = false;
     } 
@@ -133,19 +159,11 @@ const Login = () => {
     return errMsg;
   };
 
-
-   
-  
-
-
   return (
-    <div>
-    <div>
-      <Navbar/>
-    </div>
+    
     
     <div className={classes.outer}>
-    
+     
       <CssBaseline/>
       <div className={classes.paper}>
         <div className={classes.title}>
@@ -153,9 +171,8 @@ const Login = () => {
          Login
         </Typography>
         </div>
-        <form className={classes.form} >
-        {/* <form className={classes.form} noValidate 
-              onSubmit={handleSubmit(onSubmit)}> */}
+        <form className={classes.form}>
+        
 
           
           
@@ -248,7 +265,7 @@ const Login = () => {
 
       </div>
     </div>
-    </div>
+    // </div>
   );
 }
 

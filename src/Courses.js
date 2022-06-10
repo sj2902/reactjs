@@ -1,10 +1,11 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
-
+import { getAuth } from 'firebase/auth';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import {Link} from 'react-router-dom';
 import Navbar from './navCourses';
+
 
 
 
@@ -50,9 +51,27 @@ const courseStyles = makeStyles((theme) => ({
     
 })
 );
-function Courses() {
+const Courses=()=> {
     const [spacing,] = React.useState(10);
     const classes = courseStyles();
+    
+
+
+    const auth = getAuth();
+    const user = auth.currentUser;
+    if (user !== null) {
+    // The user object has basic properties such as display name, email, etc.
+    const displayName = user.displayName;
+    const email = user.email;
+    const photoURL = user.photoURL;
+    const emailVerified = user.emailVerified;
+
+    // The user's ID, unique to the Firebase project. Do NOT use
+    // this value to authenticate with your backend server, if
+    // you have one. Use User.getToken() instead.
+    const uid = user.uid;
+    console.log(email);
+    }
 
     
     
@@ -61,6 +80,8 @@ function Courses() {
             <div>
                 <Navbar />
             </div>
+
+           
         
         <div className={classes.outer} component="main">
 
@@ -79,7 +100,7 @@ function Courses() {
           {[0].map((value) => (
             
             <Grid key={value} item >
-                    <Link to="/tutorial">
+                    <Link to="/alphabets">
                     <img src='https://source.unsplash.com/Rd01U0tPmQI' alt="img" className={classes.paper}></img>
                     </Link>
                     <Typography  variant="h6">
@@ -90,7 +111,7 @@ function Courses() {
            {[0].map((value) => (
             
             <Grid key={value} item >
-                    <Link to="/tutorial">
+                    <Link to="/numbers">
                     <img src='https://source.unsplash.com/GQ327RPuxhI' alt="img" className={classes.paper}></img>
                     </Link>
                     <Typography  variant="h6">
@@ -103,7 +124,7 @@ function Courses() {
            {[0].map((value) => (
             
             <Grid key={value} item >
-                    <Link to="/tutorial">
+                    <Link to="#">
                     <img src='https://source.unsplash.com/dCC7LtjU1WA' alt="img" className={classes.paper}></img>
                     </Link>
                     <Typography  variant="h6">
@@ -116,7 +137,7 @@ function Courses() {
            {[0].map((value) => (
             
             <Grid key={value} item >
-                    <Link to="/tutorial">
+                    <Link to="#">
                     <img src='https://source.unsplash.com/qQWV91TTBrE' alt="img" className={classes.paper}></img>
                     </Link>
                     <Typography  variant="h6">
@@ -129,7 +150,7 @@ function Courses() {
            {[0].map((value) => (
             
             <Grid key={value} item >
-                    <Link to="/tutorial">
+                    <Link to="#">
                     <img src='https://source.unsplash.com/HlNcigvUi4Q' alt="img" className={classes.paper}></img>
                     </Link>
                     <Typography  variant="h6">
@@ -142,7 +163,7 @@ function Courses() {
            {[0].map((value) => (
             
             <Grid key={value} item >
-                    <Link to="/tutorial">
+                    <Link to="#">
                     <img src='https://source.unsplash.com/aqpRqg_jI3c' alt="img" className={classes.paper}></img>
                     </Link>
                     <Typography  variant="h6">

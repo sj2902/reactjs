@@ -2,21 +2,39 @@ import React from 'react';
 import {
   Nav,
   NavLink,
-  
   NavMenu,
   NavBtn,
   NavBtnLink,
 } from './NavbarElements';
+import { getAuth } from 'firebase/auth';
+import { collection, getDocs } from "firebase/firestore";
 
 
   
 const Navbar = () => {
-    
+  
+
+
+
+
+
+
+  // const querySnapshot = await getDocs(collection(db, "SignUp"));
+  // querySnapshot.forEach((doc) => {
+  // console.log(`${doc.id} => ${doc.data()}`);
+  // });
+
+
+
+
+
+  
+ 
   return (
     <>
       <Nav>
         
-  
+      
         <NavMenu>
           <NavLink to='/about' >
             About

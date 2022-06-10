@@ -26,7 +26,7 @@ const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
+    display: 'grid',
   },
   appBar: {
     transition: theme.transitions.create(['margin', 'width'], {
@@ -81,10 +81,57 @@ const useStyles = makeStyles((theme) => ({
   },
   btn:{
     backgroundColor: '#FF6F6F',
-    width: '25%',
-    marginTop :'30%',
+    width: '50%',
+    marginTop :'5%',
+    marginRight: '25%',
+    marginLeft: '25%',
     textAlign: 'center'
-  }
+  },
+  frame:{
+    '@media (max-width: 760px)':{
+      width: "700px",
+      height: "500px",
+      
+    },
+    '@media (max-width: 700px)':{
+      width: "650px",
+      height: "500px",
+      
+    },
+    '@media (max-width: 650px)':{
+      width: "600px",
+      height: "500px",
+      
+    },
+    '@media (max-width: 600px)':{
+      width: "550px",
+      height: "500px",
+      
+    },
+    '@media (max-width: 550px)':{
+      width: "500px",
+      height: "500px",
+      
+    },
+    '@media (max-width: 500px)':{
+      width: "450px",
+      height: "500px",
+      
+    },
+    '@media (max-width: 450px)':{
+      width: "400px",
+      height: "500px",
+      
+    },
+    '@media (max-width: 400px)':{
+      width: "350px",
+      height: "400px",
+      
+    }
+  },
+  // outer: {
+    
+  // }
 }));
 
 
@@ -94,6 +141,7 @@ function PersistentDrawerLeft(){
   const [open, setOpen] = useState(false);
   const [alphabet, setAlphabet]= useState(0);
   const [video, setVideo]= useState([]);
+  const[show, setShow] = useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -103,7 +151,10 @@ function PersistentDrawerLeft(){
     setOpen(false);
   };
 
+  
+
   return (
+    
     <div className={classes.root}>
       <CssBaseline />
       <AppBar
@@ -144,7 +195,7 @@ function PersistentDrawerLeft(){
         <Divider />
         <List>
           {[{name:"home",icon:<HomeIcon/>}].map((item, index) => (
-            <ListItem button key={item.name}>
+            <ListItem button key={item.name} >
               <ListItemIcon>{index % 2 === 0 ? item.icon : <MailIcon />}</ListItemIcon>
               <ListItemText primary={item.name} />
             </ListItem>
@@ -184,7 +235,8 @@ function PersistentDrawerLeft(){
           {name:"X",icon:<FiberManualRecordIcon/>,id:24, link:"https://www.youtube.com/embed/6hxO8G5Gyng"},
           {name:"Y",icon:<FiberManualRecordIcon/>,id:25, link:"https://www.youtube.com/embed/EYAKgX-zPe0"},
           {name:"Z",icon:<FiberManualRecordIcon/>,id:26, link:"https://www.youtube.com/embed/B93Ys7VI7Lk"},].map((item, index) => (
-            <ListItem button key={item.name}  onClick={() => {setAlphabet(item.id); setVideo(item.link)}}>
+            
+            <ListItem button key={item.name}  onClick={() => {setAlphabet(item.id); setVideo(item.link); setShow(true);}}>
               <ListItemIcon>{index % 2 === 0 ? item.icon:< FiberManualRecordIcon/>}</ListItemIcon>
               <ListItemText primary={item.name} />
             </ListItem>
@@ -205,11 +257,13 @@ function PersistentDrawerLeft(){
         The English Alphabet consists of 26 letters: A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z.
           </Typography> */}
         {/* </main> */}
-        <div>
-          <iframe width="760" height="500" src={video} allowfullscreen></iframe>
-          <div className={classes.btn}>
-            <Button > Assesment </Button>
-          </div>
+        <div className={classes.outer} >
+          <iframe width="760px" height="500px" src={video} className={classes.frame} allowFullScreen></iframe>
+          {
+            show? <div className={classes.btn}>
+                    <Button > Assessment </Button>
+                  </div>:null
+          }
         </div>
     </div>
   );

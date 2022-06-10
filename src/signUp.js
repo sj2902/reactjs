@@ -10,7 +10,7 @@ import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
 import { collection, addDoc } from "firebase/firestore";
 import db from "./firebase";
 import { useAlert } from "react-alert";
-import Navbar from "./navSign";
+// import Navbar from "./navSign";
  
  
  
@@ -161,10 +161,10 @@ function SignUp() {
    
   const classes = useStyles();
   return (
-    <div>
-    <div>
-      <Navbar/>
-    </div>
+    // <div>
+    // <div>
+    //   <Navbar/>
+    // </div>
    
     <div className={classes.outer} >
       <div className={classes.paper}>
@@ -301,7 +301,7 @@ function SignUp() {
       </div>
     </div>
  
-  </div>
+  // </div>
   );
 }
 export default SignUp;

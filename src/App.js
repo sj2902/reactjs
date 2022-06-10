@@ -1,33 +1,30 @@
-import React from 'react';
+import React  from 'react';
 import './App.css';
 import Login from './login';
 import SignUp from './signUp';
 import Courses from './Courses';
-<<<<<<< HEAD
-import Tutorial from './Tutorial';
 import About from './About';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Achievements from './Achievements';
 import Certificate from './Certificate';
 import WebcamStreamCapture from './Assessment';
-=======
 import PersistentDrawerRight from './Alphabet';
 import PersistentDrawer from './Number';
-import "./tuto_style.css";
+import Timer from './Timer';
+import Pathname from "./back-button";
+import Submit from "./submitAssessment";
 
 
->>>>>>> 1d5b2f44beeadb8464cfd81bfefbbca243c8c6c3
+
 
 
 function App(){
+
+  
+
   return(
     <div className="App">
-<<<<<<< HEAD
-=======
-        {/* <SignUp /> */}
-        <PersistentDrawer />
         
->>>>>>> 1d5b2f44beeadb8464cfd81bfefbbca243c8c6c3
       
       
       <Router>
@@ -37,11 +34,14 @@ function App(){
           <Route path="/" element={<Login />} />
           <Route path='/signup' element={<SignUp />} />
           <Route path='/about' element={<About />} />
-          <Route path='/courses' element={<Courses />} />
-          <Route path='/tutorial' element={<Tutorial embedId='rtOvBOTyX00'/>} />
+          <Route path='/courses' element={<Courses />}/>
+          
           <Route path="/achievements" element={<Achievements />} />
           <Route path="/certificate" element={<Certificate />} />
           <Route path="/assessment" element={<WebcamStreamCapture />} />
+          <Route path="/numbers" element={<PersistentDrawer />} />
+          <Route path="/alphabets" element={<PersistentDrawerRight />} />
+          <Route path="/trial" element={<Submit />} />
           
           
         </Routes>
@@ -58,8 +58,6 @@ export default App;
 
 
 
-<<<<<<< HEAD
-=======
 
 
 
@@ -68,4 +66,3 @@ export default App;
 
 
 
->>>>>>> 1d5b2f44beeadb8464cfd81bfefbbca243c8c6c3

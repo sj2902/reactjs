@@ -5,6 +5,7 @@ import AlertTemplate from 'react-alert-template-basic';
 import App from './App';
 
 
+
 // optional configuration
 const options = {
   // you can also just use 'bottom center'
@@ -19,9 +20,11 @@ const options = {
 
 ReactDOM.render(
   <React.StrictMode>
-    <AlertProvider template={AlertTemplate} {...options}>
-      <App />
-    </AlertProvider>
+    
+      <AlertProvider template={AlertTemplate} {...options}>
+        <App />
+      </AlertProvider>
+    
   </React.StrictMode>,
   document.getElementById('root')
 );
