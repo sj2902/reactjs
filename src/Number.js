@@ -20,6 +20,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import MailIcon from '@material-ui/icons/Mail';
 import HomeIcon from '@material-ui/icons/Home';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
+import { useNavigate } from 'react-router-dom';
 
 
 const drawerWidth = 240;
@@ -133,6 +134,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 function PersistentDrawer(){
+  const navigate = useNavigate();
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
@@ -147,6 +149,10 @@ function PersistentDrawer(){
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const takeTest = () => {
+    navigate("/assessment");
+  }
 
   return (
     <div className={classes.root}>
@@ -240,7 +246,7 @@ function PersistentDrawer(){
           <iframe width="760" height="500" src={video} className={classes.frame}  allowFullScreen></iframe>
           {
             show? <div className={classes.btn}>
-                    <Button > Assessment </Button>
+                    <Button onClick={takeTest}> Assessment </Button>
                   </div>:null
           }
           

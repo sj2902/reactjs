@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {
   Nav,
   NavLink,
@@ -6,28 +7,36 @@ import {
   NavBtn,
   NavBtnLink,
 } from './NavbarElements';
-import { getAuth } from 'firebase/auth';
-import { collection, getDocs } from "firebase/firestore";
+
+import { 
+  getAuth,
+  signOut 
+} from 'firebase/auth';
+
+import { Button } from '@material-ui/core';
+
+import { useNavigate } from 'react-router-dom';
+
 
 
   
 const Navbar = () => {
-  
+  const navigate = useNavigate();
 
+  const logout = async(e) => {
+    const authentication = getAuth();
+    e.preventDefault();
 
+    signOut(authentication)
+      .then(()=>{
+        console.log("the user signed out");
+        navigate("/");
 
-
-
-
-  // const querySnapshot = await getDocs(collection(db, "SignUp"));
-  // querySnapshot.forEach((doc) => {
-  // console.log(`${doc.id} => ${doc.data()}`);
-  // });
-
-
-
-
-
+      })
+      .catch((err) => {
+        console.log(err.message);
+      })
+  }
   
  
   return (
@@ -48,9 +57,16 @@ const Navbar = () => {
           {/* Second Nav */}
           {/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
         </NavMenu>
-        <NavBtn>
-          <NavBtnLink to='/'>Log Out</NavBtnLink>
-        </NavBtn>
+        {/* <NavBtn>
+          <NavBtnLink to='/' >
+            
+              Log Out
+            
+          </NavBtnLink>
+        </NavBtn> */}
+        <Button onClick={logout}>
+          Log Out
+        </Button>
       </Nav>
     </>
   );

@@ -1,49 +1,22 @@
-import React,{ useState } from "react";
-import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
-import { storage } from "./firebase";
-
-function Submit() {
-  const [progress, setProgress] = useState(0);
-  
-  const formHandler = (e) => {
-    e.preventDefault();
-    const file = e.target[0].files[0];
-    uploadFiles(file);
-  };
-
-  const uploadFiles = (file) => {
-    //
-    if (!file) return;
-    const sotrageRef = ref(storage, `files/${file.name}`);
-    const uploadTask = uploadBytesResumable(sotrageRef, file);
-
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const prog = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        );
-        setProgress(prog);
-      },
-      (error) => console.log(error),
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          console.log("File available at", downloadURL);
-        });
-      }
-    );
-  };
-
-  return (
-    <div>
-      <form onSubmit={formHandler}>
-        <input type="file" className="input" />
-        <button type="submit">Upload</button>
-      </form>
-      <hr />
-      <h2>Uploading done {progress}%</h2>
-    </div>
-  );
-}
-
-export default Submit;
+const authentication = getAuth();
+            const user = authentication.currentUser;
+            // const displayName = user.displayName;
+            const email = user.email;
+            // const photoURL = user.photoURL;
+            // const emailVerified = user.emailVerified;
+            // const uid = user.uid;
+            
+            // if (user !== null) {
+            // // The user object has basic properties such as display name, email, etc.
+            // const displayName = user.Firstname;
+            // const email = user.email;
+            // const photoURL = user.photoURL;
+            // const emailVerified = user.emailVerified;
+            // const uid = user.uid;
+            // // console.log(email)
+            // // The user's ID, unique to the Firebase project. Do NOT use
+            // // this value to authenticate with your backend server, if
+            // // you have one. Use User.getToken() instead.
+        
+            // }
+            console.log("user who has performed the sign is: ",email);

@@ -1,5 +1,6 @@
 import React from 'react';
 import {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -136,6 +137,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 function PersistentDrawerLeft(){
+  const navigate = useNavigate();
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
@@ -150,6 +152,10 @@ function PersistentDrawerLeft(){
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const takeTest = () => {
+    navigate("/assessment");
+  }
 
   
 
@@ -261,7 +267,7 @@ function PersistentDrawerLeft(){
           <iframe width="760px" height="500px" src={video} className={classes.frame} allowFullScreen></iframe>
           {
             show? <div className={classes.btn}>
-                    <Button > Assessment </Button>
+                    <Button onClick={takeTest}> Assessment </Button>
                   </div>:null
           }
         </div>

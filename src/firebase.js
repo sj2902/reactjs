@@ -1,8 +1,11 @@
 
-import { initializeApp } from "firebase/app";
+import { initializeApp, getApps } from "firebase/app";
 import { getStorage } from "firebase/storage";
 
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, getDocs, collection } from "firebase/firestore";
+import {getAuth} from 'firebase/auth';
+
+
 const firebaseConfig = {
     apiKey: "AIzaSyBvEAyoIxu3oKzVG5e00EVZHHH_Ejaw3Bg",
     authDomain: "isl-project-4e4e8.firebaseapp.com",
@@ -14,5 +17,42 @@ const firebaseConfig = {
 };
 
 export const app = initializeApp(firebaseConfig);
-export default getFirestore();
+export const db = getFirestore();
 export const storage = getStorage(app);
+// const authentication = getAuth();
+
+// const user = authentication.currentUser;
+
+// if (user !== null) {
+    
+//     const email = user.email;
+//     const id = user.key();
+//     console.log(email);
+//     console.log(id);
+
+    
+    
+//     }
+
+// collection ref
+// const colRef = collection(db,'SignUp')
+
+
+
+// get collection data
+// getDocs(colRef)
+//   .then((snapshot) => {
+//     let users = []
+//     let user_id = []
+//     snapshot.docs.forEach((doc) => {
+//       users.push({...doc.data(), id: doc.id})
+      
+//     })
+    
+//     console.log(users)
+
+
+//   })
+//   .catch(err => {
+//     console.log(err.message)
+//   })

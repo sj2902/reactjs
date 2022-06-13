@@ -1,10 +1,11 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import Typography from '@material-ui/core/Typography';
 import { getAuth } from 'firebase/auth';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import {Link} from 'react-router-dom';
 import Navbar from './navCourses';
+import {UserContext} from './UserContext';
 
 
 
@@ -54,24 +55,25 @@ const courseStyles = makeStyles((theme) => ({
 const Courses=()=> {
     const [spacing,] = React.useState(10);
     const classes = courseStyles();
+    const msg = useContext(UserContext);
     
 
 
-    const auth = getAuth();
-    const user = auth.currentUser;
-    if (user !== null) {
-    // The user object has basic properties such as display name, email, etc.
-    const displayName = user.displayName;
-    const email = user.email;
-    const photoURL = user.photoURL;
-    const emailVerified = user.emailVerified;
+    // const auth = getAuth();
+    // const user = auth.currentUser;
+    // if (user !== null) {
+    // // The user object has basic properties such as display name, email, etc.
+    // const displayName = user.displayName;
+    // const email = user.email;
+    // const photoURL = user.photoURL;
+    // const emailVerified = user.emailVerified;
 
-    // The user's ID, unique to the Firebase project. Do NOT use
-    // this value to authenticate with your backend server, if
-    // you have one. Use User.getToken() instead.
-    const uid = user.uid;
-    console.log(email);
-    }
+    // // The user's ID, unique to the Firebase project. Do NOT use
+    // // this value to authenticate with your backend server, if
+    // // you have one. Use User.getToken() instead.
+    // const uid = user.uid;
+    // console.log(email);
+    // }
 
     
     
@@ -80,6 +82,11 @@ const Courses=()=> {
             <div>
                 <Navbar />
             </div>
+
+            <div>
+                {msg}
+            </div>
+
 
            
         

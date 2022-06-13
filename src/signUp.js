@@ -8,9 +8,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
 import { collection, addDoc } from "firebase/firestore";
-import db from "./firebase";
 import { useAlert } from "react-alert";
-// import Navbar from "./navSign";
+import { db } from './firebase';
  
  
  
@@ -91,9 +90,13 @@ function SignUp() {
       e.preventDefault()
 
         createUserWithEmailAndPassword(authentication, email, password)
-        .then((response)=>{
-          console.log(response)
-        });
+        .then((cred)=>{
+          console.log("user created:", cred.user)
+         
+        })
+        .catch((err) =>{
+          console.log(err.message)
+        })
 
         const docRef= await addDoc(collection(db, "SignUp"), {
           Firstname: firstName,

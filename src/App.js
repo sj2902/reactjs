@@ -10,15 +10,23 @@ import Certificate from './Certificate';
 import WebcamStreamCapture from './Assessment';
 import PersistentDrawerRight from './Alphabet';
 import PersistentDrawer from './Number';
-import Timer from './Timer';
-import Pathname from "./back-button";
-import Submit from "./submitAssessment";
+import { UserContext } from './UserContext';
+import { useState, useMemo } from 'react';
+import {getAuth} from 'firebase/auth';
+
 
 
 
 
 
 function App(){
+            // const authentication = getAuth();
+            // const user = authentication.currentUser;
+            
+            // const email = user.email;
+            
+           
+  
 
   
 
@@ -28,7 +36,7 @@ function App(){
       
       
       <Router>
-        
+        <UserContext.Provider  value="hello there">
         <Routes>
           
           <Route path="/" element={<Login />} />
@@ -41,11 +49,11 @@ function App(){
           <Route path="/assessment" element={<WebcamStreamCapture />} />
           <Route path="/numbers" element={<PersistentDrawer />} />
           <Route path="/alphabets" element={<PersistentDrawerRight />} />
-          <Route path="/trial" element={<Submit />} />
+          
           
           
         </Routes>
-
+        </UserContext.Provider>
       </Router>
     </div>
   );

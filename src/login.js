@@ -1,4 +1,4 @@
-import React, {createContext} from 'react';
+import React, {useContext} from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -9,7 +9,7 @@ import {Link, useLocation} from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import { useAlert } from "react-alert";
 import { useNavigate} from "react-router-dom";
-import Courses from "./Courses";
+import { UserContext } from './UserContext';
 
 
 
@@ -75,6 +75,8 @@ const Login = () => {
   const navigate = useNavigate();
   const classes = loginStyles();
   const alert = useAlert();
+
+  // const {user,setUser} = useContext(UserContext);
   
 
   const [loginEmail, setLoginEmail] = React.useState("");
@@ -83,56 +85,44 @@ const Login = () => {
   let errMsg;
 
 
-
-
-
-
-
-
-
-
-
-
-  
-
-  
- 
   const Signin = async(e) => {
+    // setUser(user);
     const authentication = getAuth();
-    e.preventDefault()
+    // e.preventDefault()
 
-    const user = authentication.currentUser;
-    if (user !== null) {
-    // The user object has basic properties such as display name, email, etc.
-    const displayName = user.displayName;
-    const email = user.email;
-    const photoURL = user.photoURL;
-    const emailVerified = user.emailVerified;
+    // const student = authentication.currentUser;
+    // if (student !== null) {
+    // // The user object has basic properties such as display name, email, etc.
+    // const displayName = user.displayName;
+    // const email = user.email;
+    // const photoURL = user.photoURL;
+    // const emailVerified = user.emailVerified;
 
-    // The user's ID, unique to the Firebase project. Do NOT use
-    // this value to authenticate with your backend server, if
-    // you have one. Use User.getToken() instead.
-    const uid = user.uid;
+    // // The user's ID, unique to the Firebase project. Do NOT use
+    // // this value to authenticate with your backend server, if
+    // // you have one. Use User.getToken() instead.
+    // const uid = user.uid;
 
-    navigate("/achievements");
-    console.log(email);
     
-    return;
+    
+    // }
 
-    }
+    
      
     signInWithEmailAndPassword(authentication, loginEmail, loginPassword)
-    .then((response)=>{
-      console.log(response);
-    })
-    .catch((error) => {
-      if(error.code === 'auth/wrong-password'){
-        alert.error('Please check the Password');
-      }
-      if(error.code === 'auth/user-not-found'){
-        alert.error('Please check the Email');
-      }
-    })
+      .then((cred)=>{
+        console.log("the user logged in:", cred.user);
+        navigate("/courses");
+      })
+      .catch((err) => {
+        if(err.code === 'auth/wrong-password'){
+          alert.error('Please check the Password');
+        }
+        if(err.code === 'auth/user-not-found'){
+          alert.error('Please check the Email');
+        }
+        console.log(err.message);
+      })
     
     
 
@@ -149,9 +139,7 @@ const Login = () => {
       passwordInput.focus();
       errMsg = false;
     }
-    else{
-      navigate("/courses");
-    }
+    
     
    
 
@@ -239,9 +227,6 @@ const Login = () => {
            
           <Button
             onClick={Signin}
-
-
-
             type="submit"
             variant="contained"
             className={classes.submit}
