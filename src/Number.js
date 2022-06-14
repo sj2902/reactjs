@@ -133,12 +133,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function PersistentDrawer(){
+function PersistentDrawer({setUser, user},{setSign, sign}){
   const navigate = useNavigate();
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
-  const [alphabet, setAlphabet]= useState(0);
+  const [number, setNumber]= useState(0);
   const [video, setVideo]= useState([]);
   const[show, setShow] = useState(false);
 
@@ -221,7 +221,7 @@ function PersistentDrawer(){
           {name:"10 (two)",icon:<FiberManualRecordIcon/>,id:10, link:"https://www.youtube.com/embed/T2aSjchxtx0"},
           {name:"20",icon:<FiberManualRecordIcon/>,id:12, link:"https://www.youtube.com/embed/TiPKfNan3Mw"},
           {name:"30",icon:<FiberManualRecordIcon/>,id:10, link:"https://www.youtube.com/embed/TiPKfNan3Mw"},].map((item, index) => (
-            <ListItem button key={item.name}  onClick={() => {setAlphabet(item.id); setVideo(item.link); setShow(true);}}>
+            <ListItem button key={item.name}  onClick={() => {setNumber(item.id); setVideo(item.link);  setShow(true);}}>
               <ListItemIcon>{index % 2 === 0 ? item.icon:< FiberManualRecordIcon/>}</ListItemIcon>
               <ListItemText primary={item.name} />
             </ListItem>

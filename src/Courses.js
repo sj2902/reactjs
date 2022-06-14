@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import {Link} from 'react-router-dom';
 import Navbar from './navCourses';
-import {UserContext} from './UserContext';
+// import {UserContext} from './UserContext';
 
 
 
@@ -52,10 +52,10 @@ const courseStyles = makeStyles((theme) => ({
     
 })
 );
-const Courses=()=> {
+const Courses=({setUser, user})=> {
     const [spacing,] = React.useState(10);
     const classes = courseStyles();
-    const msg = useContext(UserContext);
+    // const msg = useContext(UserContext);
     
 
 
@@ -83,9 +83,9 @@ const Courses=()=> {
                 <Navbar />
             </div>
 
-            <div>
+            {/* <div>
                 {msg}
-            </div>
+            </div> */}
 
 
            

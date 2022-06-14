@@ -49,9 +49,9 @@ const Navbar = () => {
             About
           </NavLink>
           
-          <NavLink to='/achievements' >
+          {/* <NavLink to='/achievements' >
             Achievements
-          </NavLink>
+          </NavLink> */}
 
           
           {/* Second Nav */}

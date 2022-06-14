@@ -7,6 +7,7 @@ import { storage } from "./firebase";
 import { collection, addDoc, doc, setDoc } from "firebase/firestore";
 import { db } from './firebase';
 import { getAuth } from 'firebase/auth';
+import {useLocation} from 'react-router-dom';
 
 
 const assessStyles = makeStyles((theme) => ({
@@ -81,6 +82,9 @@ const WebcamStreamCapture = () => {
             // }
             // console.log("user who has performed the sign is: ",email);
 
+    const location = useLocation();
+    console.log(location.state.alphabet);
+
     const classes = assessStyles();
 
 
@@ -98,6 +102,7 @@ const WebcamStreamCapture = () => {
     const [recordCounter, setRecordCounter] = useState(30);
     
     const [progress, setProgress] = useState(0);
+    
 
 
   // const details = async(e) => {
@@ -157,23 +162,6 @@ const WebcamStreamCapture = () => {
             // console.log("user who has performed the sign is: ",email);
 
 
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       if (recordedChunks.length) {
         const blob = new Blob(recordedChunks, {
           type: "video/webm"
@@ -182,9 +170,15 @@ const WebcamStreamCapture = () => {
       const url = URL.createObjectURL(blob);
 
 
-      var sign = "one";
+      
+      // const email = user.email
+      // console.log(email)
+
+
+
+      var sign = "three";
       var underscore = "_ _";
-      var email = "trialsunday@gmail.com";
+      var email = "sakshijoshifeb00@gmail.com";
       var name= sign + underscore + email;
       
       
@@ -207,21 +201,26 @@ const WebcamStreamCapture = () => {
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
 
+
+            
             
 
             console.log("File available at", downloadURL);
             // console.log("the user who has given the assessment is:", email);
             
-            const docRef= addDoc(collection(db, "VideoInput"), {
-             sign: downloadURL,
-            }); 
+            // const docRef= addDoc(collection(db, "VideoInput"), {
+            //  sign: downloadURL,
+            // }); 
 
-            const colRef = addDoc(collection(db, "VideoOutput"), {
-              sign: downloadURL,
-            });
+            // const colRef = addDoc(collection(db, "VideoOutput"), {
+            //   sign: downloadURL,
+            // });
 
-            const cityRef = doc(db, "cities", "demo");
-            setDoc(cityRef, {capital: true}, {merge: true});
+            const docRef = doc(db, "VideoInput", {email});
+            setDoc(docRef, {"three": downloadURL});
+
+            const colRef = doc(db, "VideoOutput", {email});
+            setDoc(colRef, {"three": downloadURL});
 
             
 

@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React , {useEffect} from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -71,47 +71,47 @@ const loginStyles = makeStyles((theme) => ({
 
 
 
-const Login = () => {
+const Login = ({setUser, user}) => {
   const navigate = useNavigate();
   const classes = loginStyles();
   const alert = useAlert();
 
-  // const {user,setUser} = useContext(UserContext);
+  
+
   
 
   const [loginEmail, setLoginEmail] = React.useState("");
   const [loginPassword, setLoginPassword] = React.useState("");
+  // const [user, setUser] = React.useState("")
   
   let errMsg;
 
+//   React.useEffect(() => {
+//     if(user){
+//       navigate("/courses");
+//     }
+//     else{
+//       navigate("/");
+//     }
+    
+ 
+// }, []);
+
 
   const Signin = async(e) => {
-    // setUser(user);
+    e.preventDefault();
+
     const authentication = getAuth();
-    // e.preventDefault()
 
-    // const student = authentication.currentUser;
-    // if (student !== null) {
-    // // The user object has basic properties such as display name, email, etc.
-    // const displayName = user.displayName;
-    // const email = user.email;
-    // const photoURL = user.photoURL;
-    // const emailVerified = user.emailVerified;
 
-    // // The user's ID, unique to the Firebase project. Do NOT use
-    // // this value to authenticate with your backend server, if
-    // // you have one. Use User.getToken() instead.
-    // const uid = user.uid;
-
-    
-    
-    // }
 
     
      
     signInWithEmailAndPassword(authentication, loginEmail, loginPassword)
       .then((cred)=>{
         console.log("the user logged in:", cred.user);
+        setUser(cred.user)
+        
         navigate("/courses");
       })
       .catch((err) => {
