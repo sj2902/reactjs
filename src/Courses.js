@@ -55,6 +55,7 @@ const courseStyles = makeStyles((theme) => ({
 const Courses=({setUser, user})=> {
     const [spacing,] = React.useState(10);
     const classes = courseStyles();
+    // console.log(user.Firstname);
     // const msg = useContext(UserContext);
     
 
@@ -91,6 +92,7 @@ const Courses=({setUser, user})=> {
            
         
         <div className={classes.outer} component="main">
+            <h1>Welcome {user?.Firstname} !</h1>
 
         
 

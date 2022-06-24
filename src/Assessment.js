@@ -8,6 +8,7 @@ import { collection, addDoc, doc, setDoc } from "firebase/firestore";
 import { db } from './firebase';
 import { getAuth } from 'firebase/auth';
 import {useLocation} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 const assessStyles = makeStyles((theme) => ({
@@ -58,33 +59,16 @@ const assessStyles = makeStyles((theme) => ({
 
 
 
-const WebcamStreamCapture = () => {
-  // const authentication = getAuth();
-  //           const user = authentication.currentUser;
-            // const displayName = user.displayName;
-            // const email = user.email;
-            // const photoURL = user.photoURL;
-            // const emailVerified = user.emailVerified;
-            // const uid = user.uid;
-            
-            // if (user !== null) {
-            // // The user object has basic properties such as display name, email, etc.
-            // const displayName = user.Firstname;
-            // const email = user.email;
-            // const photoURL = user.photoURL;
-            // const emailVerified = user.emailVerified;
-            // const uid = user.uid;
-            // // console.log(email)
-            // // The user's ID, unique to the Firebase project. Do NOT use
-            // // this value to authenticate with your backend server, if
-            // // you have one. Use User.getToken() instead.
-        
-            // }
-            // console.log("user who has performed the sign is: ",email);
+const WebcamStreamCapture = ({setUser, user}) => {
+  
 
     const location = useLocation();
-    console.log(location.state.alphabet);
-
+    const sign_name =location.state.alphabet;
+    // const user_id = location.state.num;
+    const u_email = user.Email;
+    // console.log(user_id);
+    // console.log(u_email);
+    // console.log(sign);
     const classes = assessStyles();
 
 
@@ -99,68 +83,23 @@ const WebcamStreamCapture = () => {
 
 
 
-    const [recordCounter, setRecordCounter] = useState(30);
+    const [recordCounter, setRecordCounter] = React.useState(20);
     
     const [progress, setProgress] = useState(0);
+
+    const navigate = useNavigate();
     
 
 
-  // const details = async(e) => {
-   
 
-  //   const authentication = getAuth();
-  //   const user = authentication.currentUser;
-    
-  //   if (user !== null) {
-  //   // The user object has basic properties such as display name, email, etc.
-  //   const displayName = user.Firstname;
-  //   const email = user.email;
-  //   const photoURL = user.photoURL;
-  //   const emailVerified = user.emailVerified;
-  //   const uid = user.uid;
-  //   console.log(email)
-  //   // The user's ID, unique to the Firebase project. Do NOT use
-  //   // this value to authenticate with your backend server, if
-  //   // you have one. Use User.getToken() instead.
-    
-    
-    
-    
-  //   }
-  // }  
-  
-    // const formHandler = (e) => {
-    //   e.preventDefault();
-    //   const file = e.target[0].files[0];
-    //   uploadFiles(file);
-    // };
+    const gotocert = () => {
+      navigate("/certificate");
+    }
 
 
 
     const uploadFiles = () => {
-            // const authentication = getAuth();
-            // const user = authentication.currentUser;
-            // const displayName = user.displayName;
-          //  var email = user.email;
-            // const photoURL = user.photoURL;
-            // const emailVerified = user.emailVerified;
-            // const uid = user.uid;
             
-            // if (user !== null) {
-            // // The user object has basic properties such as display name, email, etc.
-            // const displayName = user.Firstname;
-            // const email = user.email;
-            // const photoURL = user.photoURL;
-            // const emailVerified = user.emailVerified;
-            // const uid = user.uid;
-            // // console.log(email)
-            // // The user's ID, unique to the Firebase project. Do NOT use
-            // // this value to authenticate with your backend server, if
-            // // you have one. Use User.getToken() instead.
-        
-            // }
-            // console.log("user who has performed the sign is: ",email);
-
 
       if (recordedChunks.length) {
         const blob = new Blob(recordedChunks, {
@@ -176,16 +115,17 @@ const WebcamStreamCapture = () => {
 
 
 
-      var sign = "three";
+      var sign = sign_name;
       var underscore = "_ _";
-      var email = "sakshijoshifeb00@gmail.com";
-      var name= sign + underscore + email;
+      var user = u_email;
+      // var email = "rawatbips@gmail.com";
+      var name= sign + underscore + user;
       
-      
+      // console.log(name);
 
       if (!blob) return;
 
-      const sotrageRef = ref(storage, `files/${email}/${sign}/${name}`);
+      const sotrageRef = ref(storage, `files/${user}/${sign}/${name}`);
 
       const uploadTask = uploadBytesResumable(sotrageRef, blob);
 
@@ -202,7 +142,7 @@ const WebcamStreamCapture = () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
 
 
-            
+          //axios.post  
             
 
             console.log("File available at", downloadURL);
@@ -216,11 +156,15 @@ const WebcamStreamCapture = () => {
             //   sign: downloadURL,
             // });
 
-            const docRef = doc(db, "VideoInput", {email});
-            setDoc(docRef, {"three": downloadURL});
+            const docRef = doc(db, "VideoInput", "ZhWs7rKtuCc6Ix6ggoMf");
+            setDoc(docRef, {[sign] : downloadURL});
 
-            const colRef = doc(db, "VideoOutput", {email});
-            setDoc(colRef, {"three": downloadURL});
+            const colRef = doc(db, "VideoOutput", "ZhWs7rKtuCc6Ix6ggoMf");
+            setDoc(colRef, {[sign] : downloadURL});
+
+
+            // console.log(user);
+
 
             
 
@@ -375,7 +319,8 @@ const WebcamStreamCapture = () => {
           </form>
           <hr />
           <h2>Uploading done {progress}%</h2>
-          
+            <a href='/alphabets' >click here to go back to tutorial</a>
+            <Button className={classes.button} onClick={gotocert}>view certificate</Button>
         </div>
       </div>
       

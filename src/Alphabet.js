@@ -1,6 +1,6 @@
 import React from 'react';
 import {useState} from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -158,6 +158,7 @@ function PersistentDrawerLeft(){
   const takeTest = () => {
    
     navigate("/assessment",{state: {alphabet: alphabet}});
+    // navigate("/assessment");
   }
 
 
@@ -247,9 +248,10 @@ function PersistentDrawerLeft(){
           {name:"Y",icon:<FiberManualRecordIcon/>,id:"Y", link:"https://www.youtube.com/embed/EYAKgX-zPe0"},
           {name:"Z",icon:<FiberManualRecordIcon/>,id:"Z", link:"https://www.youtube.com/embed/B93Ys7VI7Lk"},].map((item, index) => (
             
-            <ListItem button key={item.name}  onClick={() => {setAlphabet(item.id); 
-            
-            console.log(item.id);
+            <ListItem button key={item.name}  onClick={() => {
+            setAlphabet(item.id); 
+            // setSign(item.id);
+            // console.log(item.id);
             setVideo(item.link); 
             setShow(true);
             }}>
@@ -281,6 +283,14 @@ function PersistentDrawerLeft(){
                   </div>:null
           }
         </div>
+        {/* <Link
+          to={{
+            pathname: "/certificate",
+            
+            state: { alphabet: alphabet}
+          }}
+        >
+          go to certificate</Link> */}
     </div>
   );
 }

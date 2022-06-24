@@ -10,6 +10,9 @@ import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from 'firebas
 import { useAlert } from "react-alert";
 import { useNavigate} from "react-router-dom";
 import { UserContext } from './UserContext';
+import { getFirestore, getDocs, collection } from "firebase/firestore";
+import { db } from './firebase';
+import { query, where } from "firebase/firestore";
 
 
 
@@ -82,6 +85,10 @@ const Login = ({setUser, user}) => {
 
   const [loginEmail, setLoginEmail] = React.useState("");
   const [loginPassword, setLoginPassword] = React.useState("");
+  const colRef = collection(db,'SignUp');
+  const [num,setNum] = React.useState(0);
+ 
+
   // const [user, setUser] = React.useState("")
   
   let errMsg;
@@ -108,12 +115,35 @@ const Login = ({setUser, user}) => {
     
      
     signInWithEmailAndPassword(authentication, loginEmail, loginPassword)
-      .then((cred)=>{
-        console.log("the user logged in:", cred.user);
-        setUser(cred.user)
+      .then(async(cred)=>{
+        console.log("the user logged in:", cred.user.email);
         
+        getDocs(colRef)
+          .then((snapshot) => {
+            let users = []
+            let user_id = []
+            snapshot.docs.forEach((doc) => {
+              
+              // console.log(doc.data().Firstname);
+              if(doc.data().Email==loginEmail){
+                console.log(doc.id)
+                // setNum(doc.id)
+                setUser(doc.data())
+                
+                // console.log(doc.data().Firstname);
+              }
+             
+              // users.push({...doc.data(), id: doc.id})
+              
+            })
+            
+            
+          
+        // console.log(cred);
+        // navigate("/courses",{state: {num: num}});
         navigate("/courses");
       })
+    })
       .catch((err) => {
         if(err.code === 'auth/wrong-password'){
           alert.error('Please check the Password');

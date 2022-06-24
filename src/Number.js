@@ -133,7 +133,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function PersistentDrawer({setUser, user},{setSign, sign}){
+function PersistentDrawer({setUser, user}){
   const navigate = useNavigate();
   const classes = useStyles();
   const theme = useTheme();

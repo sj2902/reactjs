@@ -25,7 +25,8 @@ function App(){
             
             // const email = user.email;
             const [user, setUser] = useState({});
-            const [sign, setSign] = useState();
+            
+            const [sign, setSign] = useState("");
             
 
   
@@ -39,16 +40,16 @@ function App(){
         {/* <UserContext.Provider  value="hello there"> */}
         <Routes>
           
-          <Route path="/" element={<Login setUser={setUser} user={user} />} />
+          <Route path="/" element={<Login setUser={setUser} user={user}/>} />
           <Route path='/signup' element={<SignUp setUser={setUser} user={user} />} />
-          <Route path='/about' element={<About setUser={setUser} user={user} />} />
+          <Route path='/about' element={<About />} />
           <Route path='/courses' element={<Courses setUser={setUser} user={user} />}/>
           
-          <Route path="/achievements" element={<Achievements setUser={setUser} user={user} />} />
+          <Route path="/achievements" element={<Achievements/>} />
           <Route path="/certificate" element={<Certificate setUser={setUser} user={user} />} />
-          <Route path="/assessment" element={<WebcamStreamCapture setUser={setUser} user={user}  setSign={setSign} sign={sign}/>}  />
-          <Route path="/numbers" element={<PersistentDrawer setUser={setUser} user={user} setSign={setSign} sign={sign} />} />
-          <Route path="/alphabets" element={<PersistentDrawerRight setUser={setUser} user={user} setSign={setSign} sign={sign}/>} />
+          <Route path="/assessment" element={<WebcamStreamCapture setUser={setUser} user={user}   />}  />
+          <Route path="/numbers" element={<PersistentDrawer setUser={setUser} user={user} />} />
+          <Route path="/alphabets" element={<PersistentDrawerRight setUser={setUser} user={user} />} />
           
           
           
