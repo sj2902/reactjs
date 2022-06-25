@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import Webcam from 'react-webcam'; 
+import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from "@material-ui/core/Button";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
@@ -142,7 +143,9 @@ const WebcamStreamCapture = ({setUser, user}) => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
 
 
-          //axios.post  
+          axios.post('http://127.0.0.1:5000/',{headers:{
+            "Access-Control-Allow-Origin" : "*"
+          }},{params:{"downloadURL" : downloadURL}}).then(res=>{console.log(res.data)})  
             
 
             console.log("File available at", downloadURL);
