@@ -17,7 +17,7 @@ import { Button } from '@material-ui/core';
 
 import { useNavigate } from 'react-router-dom';
 
-
+import {app} from "../firebase";
 
   
 const Navbar = () => {
@@ -30,7 +30,7 @@ const Navbar = () => {
     signOut(authentication)
       .then(()=>{
         console.log("the user signed out");
-        navigate("/");
+        navigate("/login");
 
       })
       .catch((err) => {

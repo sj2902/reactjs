@@ -141,7 +141,7 @@ const Login = ({setUser, user}) => {
           
         // console.log(cred);
         // navigate("/courses",{state: {num: num}});
-        navigate("/courses");
+        navigate("/");
       })
     })
       .catch((err) => {
@@ -156,7 +156,7 @@ const Login = ({setUser, user}) => {
     
     
 
-    const emailInput = document.querySelector("#email");
+  const emailInput = document.querySelector("#email");
   const passwordInput = document.querySelector("#password");
 
     if (!loginEmail) {

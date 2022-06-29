@@ -10,9 +10,8 @@ import Certificate from './Certificate';
 import WebcamStreamCapture from './Assessment';
 import PersistentDrawerRight from './Alphabet';
 import PersistentDrawer from './Number';
-// import { UserContext } from './UserContext';
-// import { useState, useMemo } from 'react';
-import {getAuth} from 'firebase/auth';
+import Cert from "./Cert";
+// import {AuthProvider} from "./Auth";
 
 
 
@@ -35,15 +34,15 @@ function App(){
       
         
       
-      
+      {/* <AuthProvider> */}
       <Router>
-        {/* <UserContext.Provider  value="hello there"> */}
+        
         <Routes>
           
-          <Route path="/" element={<Login setUser={setUser} user={user}/>} />
-          <Route path='/signup' element={<SignUp setUser={setUser} user={user} />} />
+          <Route exact path="/login" element={<Login setUser={setUser} user={user}/>} />
+          <Route exact path='/signup' element={<SignUp setUser={setUser} user={user} />} />
           <Route path='/about' element={<About />} />
-          <Route path='/courses' element={<Courses setUser={setUser} user={user} />}/>
+          <Route exact path='/' element={<Courses setUser={setUser} user={user} />}/>
           
           <Route path="/achievements" element={<Achievements/>} />
           <Route path="/certificate" element={<Certificate setUser={setUser} user={user} />} />
@@ -51,11 +50,12 @@ function App(){
           <Route path="/numbers" element={<PersistentDrawer setUser={setUser} user={user} />} />
           <Route path="/alphabets" element={<PersistentDrawerRight setUser={setUser} user={user} />} />
           
-          
+          {/* <Route path="/cert" element={<Cert />} /> */}
           
         </Routes>
         {/* </UserContext.Provider> */}
       </Router>
+      {/* </AuthProvider> */}
     </div>
   );
 }

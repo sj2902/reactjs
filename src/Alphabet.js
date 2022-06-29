@@ -136,7 +136,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function PersistentDrawerLeft(){
+function PersistentDrawerLeft({setUser, user}){
   const navigate = useNavigate();
   const classes = useStyles();
   const theme = useTheme();
@@ -283,14 +283,14 @@ function PersistentDrawerLeft(){
                   </div>:null
           }
         </div>
-        {/* <Link
+        <Link
           to={{
             pathname: "/certificate",
             
-            state: { alphabet: alphabet}
+            // state: { alphabet: alphabet}
           }}
         >
-          go to certificate</Link> */}
+          view your certificate</Link>
     </div>
   );
 }

@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from "@material-ui/core/Button";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { storage } from "./firebase";
-import { collection, addDoc, doc, setDoc } from "firebase/firestore";
+import { collection, addDoc, doc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from './firebase';
 import { getAuth } from 'firebase/auth';
 import {useLocation} from 'react-router-dom';
@@ -93,8 +93,8 @@ const WebcamStreamCapture = ({setUser, user}) => {
 
 
 
-    const gotocert = () => {
-      navigate("/certificate");
+    const back = () => {
+      navigate("/alphabets");
     }
 
 
@@ -145,7 +145,9 @@ const WebcamStreamCapture = ({setUser, user}) => {
 
           axios.post('http://127.0.0.1:5000/',{headers:{
             "Access-Control-Allow-Origin" : "*"
-          }},{params:{"downloadURL" : downloadURL}}).then(res=>{console.log(res.data)})  
+          }},{params:{"downloadURL" : downloadURL,
+                      'sign': sign,
+                        "Unique_ID": user}}).then(res=>{console.log(res.data)})  
             
 
             console.log("File available at", downloadURL);
@@ -159,11 +161,11 @@ const WebcamStreamCapture = ({setUser, user}) => {
             //   sign: downloadURL,
             // });
 
-            const docRef = doc(db, "VideoInput", "ZhWs7rKtuCc6Ix6ggoMf");
-            setDoc(docRef, {[sign] : downloadURL});
+            const docRef = doc(db, "VideoInput", user);
+            updateDoc(docRef, {[sign] : downloadURL});
 
-            const colRef = doc(db, "VideoOutput", "ZhWs7rKtuCc6Ix6ggoMf");
-            setDoc(colRef, {[sign] : downloadURL});
+            const colRef = doc(db, "VideoOutput", user);
+            updateDoc(colRef, {[sign] : downloadURL});
 
 
             // console.log(user);
@@ -322,8 +324,9 @@ const WebcamStreamCapture = ({setUser, user}) => {
           </form>
           <hr />
           <h2>Uploading done {progress}%</h2>
-            <a href='/alphabets' >click here to go back to tutorial</a>
-            <Button className={classes.button} onClick={gotocert}>view certificate</Button>
+            <Button onClick={back}>Back To Tutorial</Button>
+            {/* <a href='/alphabets' >click here to go back to tutorial</a> */}
+            {/* <Button className={classes.button} onClick={gotocert}>view certificate</Button> */}
         </div>
       </div>
       

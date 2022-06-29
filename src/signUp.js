@@ -10,6 +10,7 @@ import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
 import { collection, addDoc } from "firebase/firestore";
 import { useAlert } from "react-alert";
 import { db } from './firebase';
+import {useHistory} from "react-router-dom";
  
  
  
@@ -71,10 +72,8 @@ const useStyles = makeStyles((theme) => ({
  
 function SignUp() {
   const navigate = useNavigate();
-
   const alert = useAlert();
  
-
   const [firstName, setfirstName] = useState(""); 
   const [lastName, setlastName] = useState("");
   const [email, setemail] = useState("");
@@ -83,8 +82,6 @@ function SignUp() {
 
   let errMsg;
 
-
- 
   const register = async(e) => {
       const authentication = getAuth();
       e.preventDefault()

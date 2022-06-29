@@ -1,78 +1,48 @@
-import { Button, makeStyles } from '@material-ui/core';
-import React from 'react';
-import { Link } from 'react-router-dom';
-import Navbar from './Navbar';
-import {useLocation} from 'react-router-dom';
+import React, { Component } from "react";
+import { exportComponentAsPNG } from "react-component-export-image";
+import "./cert.css";
 
-const styles = makeStyles((theme) => ({
-    outer: {
-        backgroundImage: "url('https://source.unsplash.com/Xaanw0s0pMk')",
-        height: '100vh',
-        width: '100vw',
-        
-        
-    },
-    content: {
-        margin: '5%',
-        fontStyle: 'italic',
-        backgroundColor: '#f5f5f5',
-        padding: '10px',
-        border: '2px solid #f5f5f5',
-        borderRadius: '40px',
-    },
-    buttons: {
-        display: 'flex',
-        padding: '90px',
-        justifyContent: 'center',
-        gap: '160px',
-        [theme.breakpoints.down('sm')]: {
-            display: 'grid',
-            gap: '60px'
-          },
-
-    },
-}));
-
-const Certificate = ({setUser, user}) => {
-    const classes= styles();
-    const location = useLocation();
-    // const sign_name =location.state.alphabet;
-    // console.log(location);
-    // console.log(user);
-    // console.log(sign);
-    return(
-
-        
-            
-        <div className={classes.outer}>
-            {/* <div>
-                <Navbar />
-            </div> */}
-        
-            <h1 className={classes.content}>
-                CERTIFICATE
-                
-                
-                <br></br>
-                This certificate is proudly presented to
-                <br></br>
-                <br></br>
-                {user?.Firstname} {user?.Lastname}
-                <hr></hr>
-                <br></br>
-                for your outstanding success in completing a course for learning the Indian Sign Language
-                </h1>
-               
-            {/* <div className={classes.buttons}>
-                <Link to="/achievements">
-                    <Button variant="contained">View Achievements</Button>
-                </Link>
-                <Button variant="contained">Next Tutorial</Button>
-                
-            </div> */}
+class Certificate extends Component {
+  certificateWrapper = React.createRef();
+  state = {
+    Name: ""
+  };
+  render({setUser, user}) {
+    return (
+      <div className="cert">
+        <div className="Meta">
+          <h1> SIGNOPEDIA</h1>
+          <h2> Generate your certificate </h2>
+          <p>Please enter your name.</p>
+          <input
+            type="text"
+            placeholder="Please enter your name..."
+            value={this.state.Name}
+            onChange={(e) => {
+              this.setState({ Name: e.target.value });
+            }}
+          />
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              exportComponentAsPNG(this.certificateWrapper, {
+                html2CanvasOptions: { backgroundColor: null }
+              });
+            }}
+          >
+            Download
+          </button>
         </div>
-        
+
+        <div id="downloadWrapper" ref={this.certificateWrapper}>
+          <div id="certificateWrapper">
+            <p>{this.state.Name}</p>
+            <img src="https://i.imgur.com/yR8EANH.png" alt="Certificate" />
+          </div>
+        </div>
+      </div>
     );
-};
+  }
+}
 
 export default Certificate;

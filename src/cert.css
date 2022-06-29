@@ -1,0 +1,49 @@
+* {
+    box-sizing: border-box;
+  }
+  .cert {
+    font-family: "Hachi Maru Pop", cursive;
+    display: flex;
+    padding: 15px;
+  }
+  .cert .Meta {
+    flex-grow: 1;
+    padding-right: 15px;
+  }
+  .cert .Meta input {
+    font-family: inherit;
+    padding: 5px;
+    width: 100%;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.25);
+    border: 2px solid rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+  }
+  .cert .Meta button {
+    padding: 10px 15px;
+    border: 2px solid #87ceeb;
+    background-color: #33f3fb;
+    font-family: inherit;
+    margin: 20px 0;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  .cert #downloadWrcerter {
+    padding: 20px;
+  }
+  .cert #certificateWrcerter {
+    box-shadow: 0 0 5px #000;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+  }
+  .cert #certificateWrcerter img {
+    display: block;
+  }
+  .cert #certificateWrcerter p {
+    font-family: "Staatliches", cursive;
+    margin: 0;
+    position: absolute;
+    left: 800px;
+    top: 650px;
+    font-size: 80pt;
+  }

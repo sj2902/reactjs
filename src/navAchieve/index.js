@@ -19,7 +19,7 @@ const Navbar = () => {
   
         <NavMenu>
 
-        <NavLink to='/courses'>
+        <NavLink to='/'>
            Courses
           </NavLink>
           
