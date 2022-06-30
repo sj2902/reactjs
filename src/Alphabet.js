@@ -1,5 +1,5 @@
 import React from 'react';
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import { useNavigate,Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import clsx from 'clsx';
@@ -21,8 +21,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import MailIcon from '@material-ui/icons/Mail';
 import HomeIcon from '@material-ui/icons/Home';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
-import { getDocs,collection, onSnapshot,doc } from 'firebase/firestore';
-import {db} from './firebase';
+
 
 const drawerWidth = 240;
 
@@ -89,9 +88,6 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: '25%',
     textAlign: 'center'
   },
-  // colour:{
-  //   backgroundColor: "000",
-  // },
   frame:{
     '@media (max-width: 760px)':{
       width: "700px",
@@ -148,46 +144,7 @@ function PersistentDrawerLeft({setUser, user}){
   const [alphabet, setAlphabet]= useState(0);
   const [video, setVideo]= useState([]);
   const[show, setShow] = useState(false);
-  const [email, setEmail] =useState("");
 
-
-  const u_email = user.Email;
-  var user_e = u_email;
-
-  useEffect(()=>{
-    setEmail(localStorage.getItem('user'))
-  },[])
-  
-  const docRef = doc (db, 'VideoOutput', user_e)
-  onSnapshot(docRef,(doc)=> {
-    console.log(doc.data())
-    // if (doc.data().A_two == "Pass"){
-    //   navigate("/certificate");
-    // }
-    // else{
-    //   console.log("fails")
-    // }
-  })
-
-// collection ref
-  // const colRef = collection(db,'VideoOutput',)
-  // // get collection data
-  //   getDocs(colRef)
-  //     .then((snapshot) => {
-  //       let users = []
-  //       let user_id = []
-  //       snapshot.docs.forEach((doc) => {
-  //         users.push({...doc.data(), id: doc.id})
-          
-  //       })
-        
-  //       console.log(users)
-
-
-  //     })
-  //     .catch(err => {
-  //       console.log(err.message)
-  //     })
   
 
   const handleDrawerOpen = () => {
@@ -231,6 +188,8 @@ function PersistentDrawerLeft({setUser, user}){
           <Typography variant="h6" noWrap>
             ALPHABETS
           </Typography>
+          <a href="https://forms.gle/cmb9xfjm6FFM4V2J9" target="_blank" >Help</a>
+
         </Toolbar>
       </AppBar>
       <Drawer
@@ -257,7 +216,6 @@ function PersistentDrawerLeft({setUser, user}){
           ))}
         </List>
         <Divider />
-        
         <List>
         {[{name:"A (one)",icon:<FiberManualRecordIcon/>,id:"A_one", link:"https://www.youtube.com/embed/U3V4BrLMtY0"},
           {name:"A (two)",icon:<FiberManualRecordIcon/>,id:"A_two", link:"https://www.youtube.com/embed/qJnXqkzA8ZI"},
@@ -282,8 +240,8 @@ function PersistentDrawerLeft({setUser, user}){
           {name:"Q",icon:<FiberManualRecordIcon/>,id:"Q", link:"https://www.youtube.com/embed/AS6y3hQk3vA"},
           {name:"R",icon:<FiberManualRecordIcon/>,id:"R", link:"https://www.youtube.com/embed/4_G0_gKSweQ"},
           {name:"S",icon:<FiberManualRecordIcon/>,id:"S", link:"https://www.youtube.com/embed/uYr6fo207Os"},
-          {name:"T (one)",icon:<FiberManualRecordIcon/>,id:"T_one", link:"https://www.youtube.com/embed/OFTO4KSZte0"},
-          {name:"T (two)",icon:<FiberManualRecordIcon/>,id:"T_two", link:"https://www.youtube.com/embed/HPRq7CjnW5w"},
+          {name:"T (one)",icon:<FiberManualRecordIcon/>,id:"T", link:"https://www.youtube.com/embed/OFTO4KSZte0"},
+          {name:"T (two)",icon:<FiberManualRecordIcon/>,id:"T", link:"https://www.youtube.com/embed/HPRq7CjnW5w"},
           {name:"U (one)",icon:<FiberManualRecordIcon/>,id:"U_one", link:"https://www.youtube.com/embed/fxzWvNbCbSY"},
           {name:"U (two)",icon:<FiberManualRecordIcon/>,id:"U_two", link:"https://www.youtube.com/embed/3KDGDTmTg7s"},
           {name:"V",icon:<FiberManualRecordIcon/>,id:"V", link:"https://www.youtube.com/embed/pwRU7eZRlNY"},
@@ -304,7 +262,6 @@ function PersistentDrawerLeft({setUser, user}){
             </ListItem>
           ))}
           </List>
-          
       </Drawer>
       {/* <main
         className={clsx(classes.content, {
@@ -326,14 +283,7 @@ function PersistentDrawerLeft({setUser, user}){
             show? <div className={classes.btn}>
                     <Button onClick={takeTest}> Assessment </Button>
                   </div>:null
-            
           }
-          {/* {
-            show? <div className={classes.btn}>
-                    <Button onClick={takeTest}> Assessment </Button>
-                  </div>:null
-            
-          } */}
         </div>
         <Link
           to={{
@@ -343,6 +293,9 @@ function PersistentDrawerLeft({setUser, user}){
           }}
         >
           view your certificate</Link>
+          {/* <Link  to={{pathname: "https://docs.google.com/forms/d/e/1FAIpQLScQk-Mfqb2uwXDnx8nbUuPMB_IoLcGf4LplrPbg9CTOGNAoCA/viewform"}} target="_blank" >Help</Link> */}
+          {/* <a href="https://forms.gle/cmb9xfjm6FFM4V2J9" target="_blank" >Help</a> */}
+        
     </div>
   );
 }

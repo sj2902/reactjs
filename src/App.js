@@ -39,10 +39,10 @@ function App(){
         
         <Routes>
           
-          <Route exact path="/login" element={<Login setUser={setUser} user={user}/>} />
+          <Route exact path="/" element={<Login setUser={setUser} user={user}/>} />
           <Route exact path='/signup' element={<SignUp setUser={setUser} user={user} />} />
           <Route path='/about' element={<About />} />
-          <Route exact path='/' element={<Courses setUser={setUser} user={user} />}/>
+          <Route exact path='/courses' element={<Courses setUser={setUser} user={user} />}/>
           
           <Route path="/achievements" element={<Achievements/>} />
           <Route path="/certificate" element={<Certificate setUser={setUser} user={user} />} />

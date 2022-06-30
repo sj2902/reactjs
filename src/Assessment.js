@@ -283,6 +283,7 @@ const WebcamStreamCapture = ({setUser, user}) => {
        
 
       <div className={classes.outer}>
+        <a href="https://drive.google.com/file/d/1J36P12p5qHa0j5et6X0kRPDNpjT0m_Gs/view?usp=sharing" target="_blank" >Instructions to perform the sign</a>
         
         <div className={classes.camera}>
           <Webcam audio={false} ref={webcamRef} />

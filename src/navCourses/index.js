@@ -30,7 +30,7 @@ const Navbar = () => {
     signOut(authentication)
       .then(()=>{
         console.log("the user signed out");
-        navigate("/login");
+        navigate("/");
 
       })
       .catch((err) => {
