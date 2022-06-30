@@ -129,8 +129,9 @@ const Login = ({setUser, user}) => {
                 console.log(doc.id)
                 // setNum(doc.id)
                 setUser(doc.data())
+                localStorage.setItem("user",doc.data().Email)
                 
-                // console.log(doc.data().Firstname);
+                console.log(doc.data());
               }
              
               // users.push({...doc.data(), id: doc.id})
@@ -141,7 +142,7 @@ const Login = ({setUser, user}) => {
           
         // console.log(cred);
         // navigate("/courses",{state: {num: num}});
-        navigate("/");
+        navigate("/courses");
       })
     })
       .catch((err) => {

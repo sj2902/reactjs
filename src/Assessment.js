@@ -143,11 +143,12 @@ const WebcamStreamCapture = ({setUser, user}) => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
 
 
-          axios.post('http://127.0.0.1:5000/',{headers:{
-            "Access-Control-Allow-Origin" : "*"
-          }},{params:{"downloadURL" : downloadURL,
-                      'sign': sign,
-                        "Unique_ID": user}}).then(res=>{console.log(res.data)})  
+                    
+        axios.post('http://127.0.0.1:5000/',{headers:{
+          "Access-Control-Allow-Origin" : "*"
+        }},{params:{"downloadURL" : downloadURL,
+                    'sign': sign,
+                      "Unique_ID": user}}).then(res=>{console.log(res.data)})  
             
 
             console.log("File available at", downloadURL);
