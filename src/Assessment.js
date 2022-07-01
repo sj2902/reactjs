@@ -14,46 +14,52 @@ import { useNavigate } from 'react-router-dom';
 
 const assessStyles = makeStyles((theme) => ({
 
-  camera: {
-    display: "grid",
-    justifyContent: "center",
-    margin: '0',
-    padding: '0',
+  // camera: {
+  //   // display: "grid",
+  //   // justifyContent: "center",
+  //   margin: '0',
+  //   padding: '0',
   
 
-  },
+  // },
   
   outer: {
-    overflow: 'hidden',
+    // overflow: 'hidden',
     display: 'grid',
     justifyContent: 'center',
     backgroundColor: '#fff',
-    height: '120vh',
+    height: '150vh',
     width: '100vw',
-    marginTop: '25px',
+    marginTop: '5px',
 
     '@media (min-width: 1016px)':{
-      display:'flex',
+      display:'grid',
     }
     
   },
  
   button:{
-    borderRadius: '100px',
+    margin: '0px',
+    padding: '0px',
+    borderRadius: '50px',
     width: '120px',
     height: '120px',
     backgroundColor: '#FF6F6F',
-    // marginTop: '10px',
+    
     
 
-    '@media (min-width: 1016px)':{
-      marginTop: '190px',
-      marginLeft: '60px',
-    }
+    // '@media (min-width: 1016px)':{
+    //   marginTop: '190px',
+    //   marginLeft: '60px',
+    // }
   },
   main: {
     overflow: 'hidden',
-  }
+  },
+  ins: {
+    color: "black"
+  },
+  
 }));
 
 
@@ -84,7 +90,7 @@ const WebcamStreamCapture = ({setUser, user}) => {
 
 
 
-    const [recordCounter, setRecordCounter] = React.useState(20);
+    const [recordCounter, setRecordCounter] = React.useState(25);
     
     const [progress, setProgress] = useState(0);
 
@@ -283,12 +289,26 @@ const WebcamStreamCapture = ({setUser, user}) => {
        
 
       <div className={classes.outer}>
-        <a href="https://drive.google.com/file/d/1J36P12p5qHa0j5et6X0kRPDNpjT0m_Gs/view?usp=sharing" target="_blank" >Instructions to perform the sign</a>
+        
         
         <div className={classes.camera}>
           <Webcam audio={false} ref={webcamRef} />
+          <br></br>
+          <a href="https://drive.google.com/file/d/1J36P12p5qHa0j5et6X0kRPDNpjT0m_Gs/view?usp=sharing" target="_blank" className={classes.ins}>Instructions to perform the sign</a>
+          <p>counter: {counter} seconds </p>
+          <p>{recordCounter} seconds </p>
+          <Button className={classes.button} onClick={()=>{
+              setActionType("start");
+            }}>Record</Button>
+
+
+
+          {recordedChunks.length > 0 && (
+            <Button className={classes.button} onClick={handleDownload}>Download</Button>
+          )}
+
         </div> 
-        <div>
+        {/* <div > */}
           {/* {capturing ? (
             <Button className={classes.button} ></Button>
           ) : (
@@ -300,26 +320,28 @@ const WebcamStreamCapture = ({setUser, user}) => {
             
             
           )} */}
+         
+          
 
-
-          <Button className={classes.button} onClick={()=>{
+          {/* <Button className={classes.button} onClick={()=>{
               setActionType("start");
-            }}></Button>
+            }}>Record</Button>
 
 
 
           {recordedChunks.length > 0 && (
             <Button className={classes.button} onClick={handleDownload}>Download</Button>
-          )}
+          )} */}
 
-          
+            
 
-        </div>
+        {/* </div> */}
         
-        <div>
-            <p>counter: {counter} </p>
-            <p>{recordCounter}</p>
-        </div>
+        {/* <div>
+            <p>counter: {counter} seconds </p>
+            
+            <p>{recordCounter} seconds </p>
+        </div> */}
         <div>
           <form onSubmit={handleUpload}>
             <button type="submit">Upload</button>

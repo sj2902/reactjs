@@ -1,5 +1,5 @@
 import React from 'react';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import { useNavigate,Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import clsx from 'clsx';
@@ -21,6 +21,10 @@ import ListItemText from '@material-ui/core/ListItemText';
 import MailIcon from '@material-ui/icons/Mail';
 import HomeIcon from '@material-ui/icons/Home';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
+import { getDocs,collection, onSnapshot,doc } from 'firebase/firestore';
+import {db} from './firebase';
+import Navbar from "./navTuto";
+
 
 
 const drawerWidth = 240;
@@ -130,8 +134,17 @@ const useStyles = makeStyles((theme) => ({
       
     }
   },
-  // outer: {
-    
+  options: {
+    display: "grid",
+    gridGap: "1px",
+    marginLeft: "70%",
+    justfiyContent: "right",
+    alignContent: "right",
+
+  },
+ 
+  // collist: {
+  //   backgroundColor: "red"
   // }
 }));
 
@@ -144,6 +157,27 @@ function PersistentDrawerLeft({setUser, user}){
   const [alphabet, setAlphabet]= useState(0);
   const [video, setVideo]= useState([]);
   const[show, setShow] = useState(false);
+  const [email, setEmail] =useState("");
+  const [progress, setProgress] = useState({});
+
+  const u_email = user.Email;
+  var user_e = u_email;
+
+  useEffect(()=>{
+    setEmail(localStorage.getItem('user'))
+  },[])
+ 
+  const docRef = doc (db, 'VideoOutput', user_e)
+  onSnapshot(docRef,(doc)=> {
+    // console.log(doc.data());
+    setProgress(doc.data());
+    // if (doc.data().A_two == "Pass"){
+    //   navigate("/certificate");
+    // }
+    // else{
+    //   console.log("fails")
+    // }
+  })
 
   
 
@@ -159,7 +193,17 @@ function PersistentDrawerLeft({setUser, user}){
    
     navigate("/assessment",{state: {alphabet: alphabet}});
     // navigate("/assessment");
-  }
+  };
+
+  const achieve = () => {
+    navigate("/achievements",{state: {progress: progress}});
+  };
+
+  const gotocourses = () => {
+    navigate("/courses");
+  };
+
+
 
 
 
@@ -168,6 +212,7 @@ function PersistentDrawerLeft({setUser, user}){
   return (
     
     <div className={classes.root}>
+      
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -188,8 +233,15 @@ function PersistentDrawerLeft({setUser, user}){
           <Typography variant="h6" noWrap>
             ALPHABETS
           </Typography>
+          <div className={classes.options}>
+          <Button variant="contained" size="small">
           <a href="https://forms.gle/cmb9xfjm6FFM4V2J9" target="_blank" >Help</a>
-
+          </Button>
+          <Button variant="outlined" size="small" onClick={achieve}>
+            Achievements
+          </Button>
+          <Button variant="contained" size="small" onClick={gotocourses}>Courses</Button>
+          </div>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -216,8 +268,8 @@ function PersistentDrawerLeft({setUser, user}){
           ))}
         </List>
         <Divider />
-        <List>
-        {[{name:"A (one)",icon:<FiberManualRecordIcon/>,id:"A_one", link:"https://www.youtube.com/embed/U3V4BrLMtY0"},
+        <List className={classes.collist}>
+        {[{name:"A (one)" , icon:<FiberManualRecordIcon/>,id:"A_one", link:"https://www.youtube.com/embed/U3V4BrLMtY0"},
           {name:"A (two)",icon:<FiberManualRecordIcon/>,id:"A_two", link:"https://www.youtube.com/embed/qJnXqkzA8ZI"},
           {name:"B (one)",icon:<FiberManualRecordIcon/>,id:"B_one", link:"https://www.youtube.com/embed/n_vC-maYVI8"},
           {name:"B (two)",icon:<FiberManualRecordIcon/>,id:"B_two", link:"https://www.youtube.com/embed/faGCD6Gyq3Q"},
@@ -285,14 +337,14 @@ function PersistentDrawerLeft({setUser, user}){
                   </div>:null
           }
         </div>
-        <Link
+        {/* <Link
           to={{
             pathname: "/certificate",
             
             // state: { alphabet: alphabet}
           }}
         >
-          view your certificate</Link>
+          view your certificate</Link> */}
           {/* <Link  to={{pathname: "https://docs.google.com/forms/d/e/1FAIpQLScQk-Mfqb2uwXDnx8nbUuPMB_IoLcGf4LplrPbg9CTOGNAoCA/viewform"}} target="_blank" >Help</Link> */}
           {/* <a href="https://forms.gle/cmb9xfjm6FFM4V2J9" target="_blank" >Help</a> */}
         

@@ -5,13 +5,14 @@ import SignUp from './signUp';
 import Courses from './Courses';
 import About from './About';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import Achievements from './Achievements';
-import Certificate from './Certificate';
+import Progress from "./Progress";
+import Certificate from './Cert';
 import WebcamStreamCapture from './Assessment';
 import PersistentDrawerRight from './Alphabet';
 import PersistentDrawer from './Number';
-import Cert from "./Cert";
+// import Cert from "./Cert";
 // import {AuthProvider} from "./Auth";
+import Achievements from './Progress';
 
 
 
@@ -44,7 +45,7 @@ function App(){
           <Route path='/about' element={<About />} />
           <Route exact path='/courses' element={<Courses setUser={setUser} user={user} />}/>
           
-          <Route path="/achievements" element={<Achievements/>} />
+          <Route path="/achievements" element={<Achievements setUser={setUser} user={user}/>} />
           <Route path="/certificate" element={<Certificate setUser={setUser} user={user} />} />
           <Route path="/assessment" element={<WebcamStreamCapture setUser={setUser} user={user}   />}  />
           <Route path="/numbers" element={<PersistentDrawer setUser={setUser} user={user} />} />

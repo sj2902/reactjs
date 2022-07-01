@@ -150,7 +150,7 @@ function SignUp() {
       }
     
       else {
-        navigate("/courses");
+        navigate("/");
         alert.show("You've signed up successfully. Proceed to login");
         errMsg = true;
       }

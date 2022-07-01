@@ -19,7 +19,7 @@ const Navbar = () => {
   
         <NavMenu>
 
-        <NavLink to='/'>
+        <NavLink to='/courses'>
            Courses
           </NavLink>
           
@@ -27,6 +27,12 @@ const Navbar = () => {
           <NavLink to='/achievements'>
             Achievements
           </NavLink>
+
+          <NavLink to='/certificate'>
+            Certificate
+          </NavLink>
+
+
          
           {/* Second Nav */}
           {/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
