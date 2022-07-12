@@ -1,17 +1,14 @@
 import React , {useState} from 'react';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import './App.css';
 import Login from './login';
 import SignUp from './signUp';
 import Courses from './Courses';
 import About from './About';
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import Progress from "./Progress";
 import Certificate from './Cert';
 import WebcamStreamCapture from './Assessment';
 import PersistentDrawerRight from './Alphabet';
 import PersistentDrawer from './Number';
-// import Cert from "./Cert";
-// import {AuthProvider} from "./Auth";
 import Achievements from './Progress';
 
 

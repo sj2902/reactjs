@@ -27,10 +27,10 @@ const assessStyles = makeStyles((theme) => ({
     // overflow: 'hidden',
     display: 'grid',
     justifyContent: 'center',
-    backgroundColor: '#fff',
-    height: '150vh',
+    backgroundColor: '#99c3ff',
+    height: '160vh',
     width: '100vw',
-    marginTop: '5px',
+    paddingTop: '5px',
 
     '@media (min-width: 1016px)':{
       display:'grid',
@@ -41,10 +41,10 @@ const assessStyles = makeStyles((theme) => ({
   button:{
     margin: '0px',
     padding: '0px',
-    borderRadius: '50px',
+    borderRadius: '60px',
     width: '120px',
     height: '120px',
-    backgroundColor: '#FF6F6F',
+    backgroundColor: '#F7f7f7',
     
     
 
@@ -294,18 +294,23 @@ const WebcamStreamCapture = ({setUser, user}) => {
         <div className={classes.camera}>
           <Webcam audio={false} ref={webcamRef} />
           <br></br>
-          <a href="https://drive.google.com/file/d/1J36P12p5qHa0j5et6X0kRPDNpjT0m_Gs/view?usp=sharing" target="_blank" className={classes.ins}>Instructions to perform the sign</a>
-          <p>counter: {counter} seconds </p>
+          <a href="https://drive.google.com/file/d/1J36P12p5qHa0j5et6X0kRPDNpjT0m_Gs/view?usp=sharing" target="_blank" className={classes.ins}>Click here for instructions to perform the sign</a>
+          <p>get ready!: {counter}</p>
           <p>{recordCounter} seconds </p>
-          <Button className={classes.button} onClick={()=>{
+          <Button  className={classes.button} onClick={()=>{
               setActionType("start");
             }}>Record</Button>
 
+          <hr/>
+          <Button onClick={handleUpload} variant="contained">Submit</Button>
+          <hr />
+          <h2>Uploading...{progress}%</h2>
+          <Button onClick={back} variant="contained">Back To Tutorial</Button>
+          
 
-
-          {recordedChunks.length > 0 && (
+          {/* {recordedChunks.length > 0 && (
             <Button className={classes.button} onClick={handleDownload}>Download</Button>
-          )}
+          )} */}
 
         </div> 
         {/* <div > */}
@@ -342,16 +347,7 @@ const WebcamStreamCapture = ({setUser, user}) => {
             
             <p>{recordCounter} seconds </p>
         </div> */}
-        <div>
-          <form onSubmit={handleUpload}>
-            <button type="submit">Upload</button>
-          </form>
-          <hr />
-          <h2>Uploading done {progress}%</h2>
-            <Button onClick={back}>Back To Tutorial</Button>
-            {/* <a href='/alphabets' >click here to go back to tutorial</a> */}
-            {/* <Button className={classes.button} onClick={gotocert}>view certificate</Button> */}
-        </div>
+        
       </div>
       
     );

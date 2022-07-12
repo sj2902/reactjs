@@ -9,7 +9,7 @@ import {Link, useLocation} from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import { useAlert } from "react-alert";
 import { useNavigate} from "react-router-dom";
-import { UserContext } from './UserContext';
+
 import { getFirestore, getDocs, collection } from "firebase/firestore";
 import { db } from './firebase';
 import { query, where } from "firebase/firestore";
