@@ -5,13 +5,34 @@ import { makeStyles} from '@material-ui/core/styles';
 import { useAlert } from "react-alert";
 import { Button } from '@material-ui/core';
 import { useNavigate } from 'react-router-dom';
+import './progress.css';
 
 const useStyles = makeStyles((theme) => ({
+    outer:{
+        backgroundColor: "#80dd13",
+        
+    },    
     tab: {
         marginTop: "11%",
         marginBottom: "20%",
         marginLeft: "40%",
-        marginRight: "20%"
+        marginRight: "20%",
+        backgroundColor: "#F0F8FF",
+        border: "5px solid black",
+        
+
+        [theme.breakpoints.down('sm')]: {
+            marginTop: "11%",
+            marginBottom: "20%",
+            marginLeft: "20%",
+            marginRight: "20%",
+            
+          },
+    },
+    
+    button:{
+        backgroundColor: "#F0F8FF",
+        marginTop: "10px",
     }
 }));
 
@@ -219,21 +240,21 @@ function Achievements({setUser, user}){
     // })
 
     return(
-        <div>
+        <div className={classes.outer}>
         
             <div>
             <Progress />
             </div>
-            <Button onClick={result}>generate your certificate</Button>
+            <Button  className={classes.button} onClick={result}>generate your certificate</Button>
             <div className={classes.tab}>
-                <table border="1px solid">
+                <table >
                     <tr>
-                        <th border="1px solid">Alphabet </th>
-                        <th border="1px solid"> Result</th>
+                        <th>Alphabet </th>
+                        <th> Result</th>
                     </tr>
                             {Object.keys(user_progress).map(item=>{
-                                return <tr> <td border="1px solid"> {`${item}`}</td>
-                                            <td border="1px solid"> {`${user_progress[item]}`}</td>
+                                return <tr> <td> {`${item}`}</td>
+                                            <td> {`${user_progress[item]}`}</td>
                                         </tr>
                             })}
                 </table>

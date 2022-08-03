@@ -15,27 +15,17 @@ const Navbar = () => {
   return (
     <>
       <Nav>
-        
-  
+   
         <NavMenu>
 
-        <NavLink to='/courses'>
+        {/* <NavLink to='/courses'>
            Courses
-          </NavLink>
-          
+          </NavLink> */}
+        
+          <NavBtn>
+          <NavBtnLink to='/courses'>Courses</NavBtnLink>
+        </NavBtn>
 
-          <NavLink to='/achievements'>
-            Achievements
-          </NavLink>
-
-          <NavLink to='/certificate'>
-            Certificate
-          </NavLink>
-
-
-         
-          {/* Second Nav */}
-          {/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
         </NavMenu>
         <NavBtn>
           <NavBtnLink to='/'>Log Out</NavBtnLink>
