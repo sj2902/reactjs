@@ -24,7 +24,7 @@ const courseStyles = makeStyles((theme) => ({
     },
     outer: {
         backgroundColor: '#ded9d9',
-        height: '250vh',
+        height: '270vh',
         width: '100vw',
         
        

@@ -11,7 +11,7 @@ const aboutStyles = makeStyles((theme) => ({
     outer: {
         padding: '20px',
         backgroundColor: '#ded9d9',
-        height: '100vh',
+        height: '120vh',
         minWidth: '200px',
     },
     app: {

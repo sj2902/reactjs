@@ -70,7 +70,8 @@ const WebcamStreamCapture = ({setUser, user}) => {
   
 
     const location = useLocation();
-    const sign_name =location.state.alphabet;
+    const sign_name =location.state.alphabet||location.state.number;
+    
     // const user_id = location.state.num;
     const u_email = user.Email;
     // console.log(user_id);
@@ -295,8 +296,8 @@ const WebcamStreamCapture = ({setUser, user}) => {
           <Webcam audio={false} ref={webcamRef} />
           <br></br>
           <a href="https://drive.google.com/file/d/1J36P12p5qHa0j5et6X0kRPDNpjT0m_Gs/view?usp=sharing" target="_blank" className={classes.ins}>Click here for instructions to perform the sign</a>
-          <p>get ready!: {counter}</p>
-          <p>{recordCounter} seconds </p>
+          <p>get ready!: {counter} || hold the sign: {recordCounter}</p>
+          {/* <p>{recordCounter} seconds </p> */}
           <Button  className={classes.button} onClick={()=>{
               setActionType("start");
             }}>Record</Button>

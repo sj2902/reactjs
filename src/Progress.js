@@ -10,22 +10,27 @@ import './progress.css';
 const useStyles = makeStyles((theme) => ({
     outer:{
         backgroundColor: "#80dd13",
+        height: "200vh",
+        [theme.breakpoints.down('sm')]: {
+            height: "250vh"
+            
+            
+          },
         
     },    
     tab: {
-        marginTop: "11%",
-        marginBottom: "20%",
-        marginLeft: "40%",
-        marginRight: "20%",
+        display: "grid",
+        marginTop: "5%",
+        
+        marginLeft: "17%",
+        marginRight: "17%",
         backgroundColor: "#F0F8FF",
-        border: "5px solid black",
+        
         
 
         [theme.breakpoints.down('sm')]: {
-            marginTop: "11%",
-            marginBottom: "20%",
-            marginLeft: "20%",
-            marginRight: "20%",
+            display: "grid",
+
             
           },
     },
@@ -44,16 +49,18 @@ function Achievements({setUser, user}){
     const classes = useStyles();
 
     const location = useLocation();
-    const user_prog =location.state.progress;
+    // const user_prog =location.state.progress;
 
-    var user_progress = user_prog;
+
+
+    var user_progress = location.state.progress|| location.state.numProgress;
 
     const u_email = user.Email;
     var user_e = u_email;
 
     const result = (e) => {
         e.preventDefault()
-        if(Object.keys(user_progress).length !== 32 ){
+        if(Object.keys(user_progress).length !== 50 ){
             alert.error("user has not completed the course");
             errMsg = false;
         }
@@ -186,8 +193,80 @@ function Achievements({setUser, user}){
                     alert.error("user has not completed the course");
                     errMsg = false;
                 }
+                else if(user_progress.zero !== "Pass"){
+                    alert.error("user has not completed the course");
+                    errMsg = false;
+                }
+                else if(user_progress.one !== "Pass"){
+                    alert.error("user has not completed the course");
+                    errMsg = false;
+                }
+                else if(user_progress.two !== "Pass"){
+                    alert.error("user has not completed the course");
+                    errMsg = false;
+                }
+                else if(user_progress.three !== "Pass"){
+                    alert.error("user has not completed the course");
+                    errMsg = false;
+                }
+                else if(user_progress.four !== "Pass"){
+                    alert.error("user has not completed the course");
+                    errMsg = false;
+                }
+                else if(user_progress.five !== "Pass"){
+                    alert.error("user has not completed the course");
+                    errMsg = false;
+                }
+                else if(user_progress.six_one !== "Pass"){
+                    alert.error("user has not completed the course");
+                    errMsg = false;
+                }
+                else if(user_progress.six_two !== "Pass"){
+                    alert.error("user has not completed the course");
+                    errMsg = false;
+                }
+                else if(user_progress.seven_one !== "Pass"){
+                    alert.error("user has not completed the course");
+                    errMsg = false;
+                }
+                else if(user_progress.seven_two !== "Pass"){
+                    alert.error("user has not completed the course");
+                    errMsg = false;
+                }
+                else if(user_progress.eight_one !== "Pass"){
+                    alert.error("user has not completed the course");
+                    errMsg = false;
+                }
+                else if(user_progress.eight_two !== "Pass"){
+                    alert.error("user has not completed the course");
+                    errMsg = false;
+                }
+                else if(user_progress.nine_one !== "Pass"){
+                    alert.error("user has not completed the course");
+                    errMsg = false;
+                }
+                else if(user_progress.nine_two !== "Pass"){
+                    alert.error("user has not completed the course");
+                    errMsg = false;
+                }
+                else if(user_progress.ten_one !== "Pass"){
+                    alert.error("user has not completed the course");
+                    errMsg = false;
+                }
+                else if(user_progress.ten_two !== "Pass"){
+                    alert.error("user has not completed the course");
+                    errMsg = false;
+                }
+                else if(user_progress.twenty !== "Pass"){
+                    alert.error("user has not completed the course");
+                    errMsg = false;
+                }
+                else if(user_progress.thirty !== "Pass"){
+                    alert.error("user has not completed the course");
+                    errMsg = false;
+                }
                 else{
-                    navigate("/certificate");
+                    navigate("/certificate",{state:{number: location.state.number,alphabet: location.state.alphabet}});
                     errMsg = true;
                 }  
         }

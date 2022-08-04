@@ -141,6 +141,7 @@ const useStyles = makeStyles((theme) => ({
     justfiyContent: "right",
     alignContent: "right",
 
+    
   },
  
   // collist: {
@@ -196,7 +197,7 @@ function PersistentDrawerLeft({setUser, user}){
   };
 
   const achieve = () => {
-    navigate("/achievements",{state: {progress: progress}});
+    navigate("/achievements",{state: {progress: progress,alphabet: alphabet}});
   };
 
   const gotocourses = () => {
