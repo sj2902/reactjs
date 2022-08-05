@@ -7,9 +7,10 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, setDoc, doc } from "firebase/firestore";
 import { useAlert } from "react-alert";
 import { db } from './firebase';
+import {useHistory} from "react-router-dom";
  
  
  
@@ -71,10 +72,8 @@ const useStyles = makeStyles((theme) => ({
  
 function SignUp() {
   const navigate = useNavigate();
-
   const alert = useAlert();
  
-
   const [firstName, setfirstName] = useState(""); 
   const [lastName, setlastName] = useState("");
   const [email, setemail] = useState("");
@@ -83,8 +82,6 @@ function SignUp() {
 
   let errMsg;
 
-
- 
   const register = async(e) => {
       const authentication = getAuth();
       e.preventDefault()
@@ -104,8 +101,21 @@ function SignUp() {
           Email: email,
           Password: password,
           Confirm_Password: cPass,
-        });      
+        });
 
+
+        var email_id = email;
+        console.log(email_id);
+
+        await setDoc(doc(db, "VideoInput", email_id), {
+          'Email': email_id
+        });
+
+        await setDoc(doc(db, "VideoOutput", email_id), {
+          'Email': email_id
+        });
+      
+          
       const fName = document.querySelector('#firstName1');
       const lName = document.querySelector('#lastName1');
       const u_email = document.querySelector("#email1");
@@ -309,4 +319,3 @@ function SignUp() {
 }
 export default SignUp;
  
-

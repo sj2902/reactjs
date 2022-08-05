@@ -7,6 +7,7 @@ import {
   NavBtn,
   NavBtnLink,
 } from './NavbarElements';
+import {Link} from "react-router-dom";
 
 
   
@@ -22,9 +23,10 @@ const Navbar = () => {
             About
           </NavLink>
           
-          <NavLink to='/courses' >
+          <NavLink to='/' >
             Courses
           </NavLink>
+          <Link  to={{pathname: "https://forms.gle/cmb9xfjm6FFM4V2J9"}} target="_blank" >Help</Link>
 
           
           {/* Second Nav */}

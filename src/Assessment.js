@@ -1,90 +1,82 @@
 import React, {useState} from 'react';
 import Webcam from 'react-webcam'; 
+import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from "@material-ui/core/Button";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { storage } from "./firebase";
-import { collection, addDoc, doc, setDoc } from "firebase/firestore";
+import { collection, addDoc, doc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from './firebase';
 import { getAuth } from 'firebase/auth';
 import {useLocation} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 const assessStyles = makeStyles((theme) => ({
 
-  camera: {
-    display: "grid",
-    justifyContent: "center",
-    margin: '0',
-    padding: '0',
+  // camera: {
+  //   // display: "grid",
+  //   // justifyContent: "center",
+  //   margin: '0',
+  //   padding: '0',
   
 
-  },
+  // },
   
   outer: {
-    overflow: 'hidden',
+    // overflow: 'hidden',
     display: 'grid',
     justifyContent: 'center',
-    backgroundColor: '#fff',
-    height: '120vh',
+    backgroundColor: '#99c3ff',
+    height: '160vh',
     width: '100vw',
-    marginTop: '25px',
+    paddingTop: '5px',
 
     '@media (min-width: 1016px)':{
-      display:'flex',
+      display:'grid',
     }
     
   },
  
   button:{
-    borderRadius: '100px',
+    margin: '0px',
+    padding: '0px',
+    borderRadius: '60px',
     width: '120px',
     height: '120px',
-    backgroundColor: '#FF6F6F',
-    // marginTop: '10px',
+    backgroundColor: '#F7f7f7',
+    
     
 
-    '@media (min-width: 1016px)':{
-      marginTop: '190px',
-      marginLeft: '60px',
-    }
+    // '@media (min-width: 1016px)':{
+    //   marginTop: '190px',
+    //   marginLeft: '60px',
+    // }
   },
   main: {
     overflow: 'hidden',
-  }
+  },
+  ins: {
+    color: "black"
+  },
+  
 }));
 
 
 
 
 
-const WebcamStreamCapture = () => {
-  // const authentication = getAuth();
-  //           const user = authentication.currentUser;
-            // const displayName = user.displayName;
-            // const email = user.email;
-            // const photoURL = user.photoURL;
-            // const emailVerified = user.emailVerified;
-            // const uid = user.uid;
-            
-            // if (user !== null) {
-            // // The user object has basic properties such as display name, email, etc.
-            // const displayName = user.Firstname;
-            // const email = user.email;
-            // const photoURL = user.photoURL;
-            // const emailVerified = user.emailVerified;
-            // const uid = user.uid;
-            // // console.log(email)
-            // // The user's ID, unique to the Firebase project. Do NOT use
-            // // this value to authenticate with your backend server, if
-            // // you have one. Use User.getToken() instead.
-        
-            // }
-            // console.log("user who has performed the sign is: ",email);
+const WebcamStreamCapture = ({setUser, user}) => {
+  
 
     const location = useLocation();
-    console.log(location.state.alphabet);
-
+    const sign_name =location.state.alphabet||location.state.number;
+    
+    // const user_id = location.state.num;
+    const u_email = user.Email;
+    // console.log(user_id);
+    // console.log(u_email);
+    // console.log(sign);
     const classes = assessStyles();
 
 
@@ -99,68 +91,23 @@ const WebcamStreamCapture = () => {
 
 
 
-    const [recordCounter, setRecordCounter] = useState(30);
+    const [recordCounter, setRecordCounter] = React.useState(25);
     
     const [progress, setProgress] = useState(0);
+
+    const navigate = useNavigate();
     
 
 
-  // const details = async(e) => {
-   
 
-  //   const authentication = getAuth();
-  //   const user = authentication.currentUser;
-    
-  //   if (user !== null) {
-  //   // The user object has basic properties such as display name, email, etc.
-  //   const displayName = user.Firstname;
-  //   const email = user.email;
-  //   const photoURL = user.photoURL;
-  //   const emailVerified = user.emailVerified;
-  //   const uid = user.uid;
-  //   console.log(email)
-  //   // The user's ID, unique to the Firebase project. Do NOT use
-  //   // this value to authenticate with your backend server, if
-  //   // you have one. Use User.getToken() instead.
-    
-    
-    
-    
-  //   }
-  // }  
-  
-    // const formHandler = (e) => {
-    //   e.preventDefault();
-    //   const file = e.target[0].files[0];
-    //   uploadFiles(file);
-    // };
+    const back = () => {
+      navigate("/alphabets");
+    }
 
 
 
     const uploadFiles = () => {
-            // const authentication = getAuth();
-            // const user = authentication.currentUser;
-            // const displayName = user.displayName;
-          //  var email = user.email;
-            // const photoURL = user.photoURL;
-            // const emailVerified = user.emailVerified;
-            // const uid = user.uid;
             
-            // if (user !== null) {
-            // // The user object has basic properties such as display name, email, etc.
-            // const displayName = user.Firstname;
-            // const email = user.email;
-            // const photoURL = user.photoURL;
-            // const emailVerified = user.emailVerified;
-            // const uid = user.uid;
-            // // console.log(email)
-            // // The user's ID, unique to the Firebase project. Do NOT use
-            // // this value to authenticate with your backend server, if
-            // // you have one. Use User.getToken() instead.
-        
-            // }
-            // console.log("user who has performed the sign is: ",email);
-
 
       if (recordedChunks.length) {
         const blob = new Blob(recordedChunks, {
@@ -176,16 +123,17 @@ const WebcamStreamCapture = () => {
 
 
 
-      var sign = "three";
+      var sign = sign_name;
       var underscore = "_ _";
-      var email = "sakshijoshifeb00@gmail.com";
-      var name= sign + underscore + email;
+      var user = u_email;
+      // var email = "rawatbips@gmail.com";
+      var name= sign + underscore + user;
       
-      
+      // console.log(name);
 
       if (!blob) return;
 
-      const sotrageRef = ref(storage, `files/${email}/${sign}/${name}`);
+      const sotrageRef = ref(storage, `files/${user}/${sign}/${name}`);
 
       const uploadTask = uploadBytesResumable(sotrageRef, blob);
 
@@ -202,7 +150,12 @@ const WebcamStreamCapture = () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
 
 
-            
+                    
+        axios.post('http://127.0.0.1:5000/',{headers:{
+          "Access-Control-Allow-Origin" : "*"
+        }},{params:{"downloadURL" : downloadURL,
+                    'sign': sign,
+                      "Unique_ID": user}}).then(res=>{console.log(res.data)})  
             
 
             console.log("File available at", downloadURL);
@@ -216,11 +169,15 @@ const WebcamStreamCapture = () => {
             //   sign: downloadURL,
             // });
 
-            const docRef = doc(db, "VideoInput", {email});
-            setDoc(docRef, {"three": downloadURL});
+            const docRef = doc(db, "VideoInput", user);
+            updateDoc(docRef, {[sign] : downloadURL});
 
-            const colRef = doc(db, "VideoOutput", {email});
-            setDoc(colRef, {"three": downloadURL});
+            const colRef = doc(db, "VideoOutput", user);
+            updateDoc(colRef, {[sign] : downloadURL});
+
+
+            // console.log(user);
+
 
             
 
@@ -334,10 +291,30 @@ const WebcamStreamCapture = () => {
 
       <div className={classes.outer}>
         
+        
         <div className={classes.camera}>
           <Webcam audio={false} ref={webcamRef} />
+          <br></br>
+          <a href="https://drive.google.com/file/d/1J36P12p5qHa0j5et6X0kRPDNpjT0m_Gs/view?usp=sharing" target="_blank" className={classes.ins}>Click here for instructions to perform the sign</a>
+          <p>get ready!: {counter} || hold the sign: {recordCounter}</p>
+          {/* <p>{recordCounter} seconds </p> */}
+          <Button  className={classes.button} onClick={()=>{
+              setActionType("start");
+            }}>Record</Button>
+
+          <hr/>
+          <Button onClick={handleUpload} variant="contained">Submit</Button>
+          <hr />
+          <h2>Uploading...{progress}%</h2>
+          <Button onClick={back} variant="contained">Back To Tutorial</Button>
+          
+
+          {/* {recordedChunks.length > 0 && (
+            <Button className={classes.button} onClick={handleDownload}>Download</Button>
+          )} */}
+
         </div> 
-        <div>
+        {/* <div > */}
           {/* {capturing ? (
             <Button className={classes.button} ></Button>
           ) : (
@@ -349,34 +326,29 @@ const WebcamStreamCapture = () => {
             
             
           )} */}
+         
+          
 
-
-          <Button className={classes.button} onClick={()=>{
+          {/* <Button className={classes.button} onClick={()=>{
               setActionType("start");
-            }}></Button>
+            }}>Record</Button>
 
 
 
           {recordedChunks.length > 0 && (
             <Button className={classes.button} onClick={handleDownload}>Download</Button>
-          )}
+          )} */}
 
-          
+            
 
-        </div>
+        {/* </div> */}
         
-        <div>
-            <p>counter: {counter} </p>
-            <p>{recordCounter}</p>
-        </div>
-        <div>
-          <form onSubmit={handleUpload}>
-            <button type="submit">Upload</button>
-          </form>
-          <hr />
-          <h2>Uploading done {progress}%</h2>
-          
-        </div>
+        {/* <div>
+            <p>counter: {counter} seconds </p>
+            
+            <p>{recordCounter} seconds </p>
+        </div> */}
+        
       </div>
       
     );

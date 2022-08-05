@@ -1,18 +1,15 @@
 import React , {useState} from 'react';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import './App.css';
 import Login from './login';
 import SignUp from './signUp';
 import Courses from './Courses';
 import About from './About';
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import Achievements from './Achievements';
-import Certificate from './Certificate';
+import Certificate from './Cert';
 import WebcamStreamCapture from './Assessment';
 import PersistentDrawerRight from './Alphabet';
 import PersistentDrawer from './Number';
-// import { UserContext } from './UserContext';
-// import { useState, useMemo } from 'react';
-import {getAuth} from 'firebase/auth';
+import Achievements from './Progress';
 
 
 
@@ -25,7 +22,8 @@ function App(){
             
             // const email = user.email;
             const [user, setUser] = useState({});
-            const [sign, setSign] = useState();
+            
+            const [sign, setSign] = useState("");
             
 
   
@@ -34,27 +32,28 @@ function App(){
       
         
       
-      
+      {/* <AuthProvider> */}
       <Router>
-        {/* <UserContext.Provider  value="hello there"> */}
+        
         <Routes>
           
-          <Route path="/" element={<Login setUser={setUser} user={user} />} />
-          <Route path='/signup' element={<SignUp setUser={setUser} user={user} />} />
-          <Route path='/about' element={<About setUser={setUser} user={user} />} />
-          <Route path='/courses' element={<Courses setUser={setUser} user={user} />}/>
+          <Route exact path="/" element={<Login setUser={setUser} user={user}/>} />
+          <Route exact path='/signup' element={<SignUp setUser={setUser} user={user} />} />
+          <Route path='/about' element={<About />} />
+          <Route exact path='/courses' element={<Courses setUser={setUser} user={user} />}/>
           
-          <Route path="/achievements" element={<Achievements setUser={setUser} user={user} />} />
+          <Route path="/achievements" element={<Achievements setUser={setUser} user={user}/>} />
           <Route path="/certificate" element={<Certificate setUser={setUser} user={user} />} />
-          <Route path="/assessment" element={<WebcamStreamCapture setUser={setUser} user={user}  setSign={setSign} sign={sign}/>}  />
-          <Route path="/numbers" element={<PersistentDrawer setUser={setUser} user={user} setSign={setSign} sign={sign} />} />
-          <Route path="/alphabets" element={<PersistentDrawerRight setUser={setUser} user={user} setSign={setSign} sign={sign}/>} />
+          <Route path="/assessment" element={<WebcamStreamCapture setUser={setUser} user={user}   />}  />
+          <Route path="/numbers" element={<PersistentDrawer setUser={setUser} user={user} />} />
+          <Route path="/alphabets" element={<PersistentDrawerRight setUser={setUser} user={user} />} />
           
-          
+          {/* <Route path="/cert" element={<Cert />} /> */}
           
         </Routes>
         {/* </UserContext.Provider> */}
       </Router>
+      {/* </AuthProvider> */}
     </div>
   );
 }

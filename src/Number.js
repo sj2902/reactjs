@@ -1,5 +1,6 @@
 import React from 'react';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
+import { useNavigate,Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -20,7 +21,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import MailIcon from '@material-ui/icons/Mail';
 import HomeIcon from '@material-ui/icons/Home';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
-import { useNavigate } from 'react-router-dom';
+import { getDocs,collection, onSnapshot,doc } from 'firebase/firestore';
+import {db} from './firebase';
+import Navbar from "./navTuto";
 
 
 const drawerWidth = 240;
@@ -130,10 +133,20 @@ const useStyles = makeStyles((theme) => ({
       
     }
   },
+  options: {
+    display: "grid",
+    gridGap: "1px",
+    marginLeft: "70%",
+    justfiyContent: "right",
+    alignContent: "right",
+
+    
+  },
+ 
 }));
 
 
-function PersistentDrawer({setUser, user},{setSign, sign}){
+function PersistentDrawer({setUser, user}){
   const navigate = useNavigate();
   const classes = useStyles();
   const theme = useTheme();
@@ -141,6 +154,27 @@ function PersistentDrawer({setUser, user},{setSign, sign}){
   const [number, setNumber]= useState(0);
   const [video, setVideo]= useState([]);
   const[show, setShow] = useState(false);
+  const [email, setEmail] =useState("");
+  const [numProgress, setNumProgress] = useState({});
+
+  const u_email = user.Email;
+  var user_e = u_email;
+
+  useEffect(()=>{
+    setEmail(localStorage.getItem('user'))
+  },[]);
+
+  const docRef = doc (db, 'VideoOutput', user_e)
+  onSnapshot(docRef,(doc)=> {
+    // console.log(doc.data());
+    setNumProgress(doc.data());
+    // if (doc.data().A_two == "Pass"){
+    //   navigate("/certificate");
+    // }
+    // else{
+    //   console.log("fails")
+    // }
+  })
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -151,8 +185,16 @@ function PersistentDrawer({setUser, user},{setSign, sign}){
   };
 
   const takeTest = () => {
-    navigate("/assessment");
-  }
+    navigate("/assessment",{state: {number: number}});
+  };
+
+  const achieve = () => {
+    navigate("/achievements",{state: {numProgress: numProgress,number: number}});
+  };
+
+  const gotocourses = () => {
+    navigate("/courses");
+  };
 
   return (
     <div className={classes.root}>
@@ -176,6 +218,15 @@ function PersistentDrawer({setUser, user},{setSign, sign}){
           <Typography variant="h6" noWrap>
             NUMBERS
           </Typography>
+          <div className={classes.options}>
+          <Button variant="contained" size="small">
+          <a href="https://forms.gle/cmb9xfjm6FFM4V2J9" target="_blank" >Help</a>
+          </Button>
+          <Button variant="outlined" size="small" onClick={achieve}>
+            Achievements
+          </Button>
+          <Button variant="contained" size="small" onClick={gotocourses}>Courses</Button>
+          </div>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -203,25 +254,31 @@ function PersistentDrawer({setUser, user},{setSign, sign}){
         </List>
         <Divider />
         <List>
-          {[{name:"0",icon:<FiberManualRecordIcon/>,id:1, link:"https://www.youtube.com/embed/BzCTjQht4g0"},
-          {name:"1",icon:<FiberManualRecordIcon/>,id:2, link:"https://www.youtube.com/embed/NS29lGEqUs8"},
-          {name:"2",icon:<FiberManualRecordIcon/>,id:3, link:"https://www.youtube.com/embed/TutvHZU4rCE"},
-          {name:"3",icon:<FiberManualRecordIcon/>,id:4, link:"https://www.youtube.com/embed/4s-tDPcu048"},
-          {name:"4",icon:<FiberManualRecordIcon/>,id:5, link:"https://www.youtube.com/embed/hiVPVSUvMlA"},
-          {name:"5",icon:<FiberManualRecordIcon/>,id:6, link:"https://www.youtube.com/embed/DJ7rYmT1Q7Y"},
-          {name:"6 (one)",icon:<FiberManualRecordIcon/>,id:7, link:"https://www.youtube.com/embed/Buj78vHmf-I"},
-          {name:"6 (two)",icon:<FiberManualRecordIcon/>,id:7, link:"https://www.youtube.com/embed/TiPKfNan3Mw"},
-          {name:"7 (one)",icon:<FiberManualRecordIcon/>,id:8, link:"https://www.youtube.com/embed/TiPKfNan3Mw"},
-          {name:"7 (two)",icon:<FiberManualRecordIcon/>,id:8, link:"https://www.youtube.com/embed/x-ryvN1vB-Y"},
-          {name:"8 (one)",icon:<FiberManualRecordIcon/>,id:9, link:"https://www.youtube.com/embed/TiPKfNan3Mw"},
-          {name:"8 (two)",icon:<FiberManualRecordIcon/>,id:9, link:"https://www.youtube.com/embed/SR5xHFS20Ko"},
-          {name:"9 (one)",icon:<FiberManualRecordIcon/>,id:10, link:"https://www.youtube.com/embed/RISbsCoNX_c"},
-          {name:"9 (two)",icon:<FiberManualRecordIcon/>,id:10, link:"https://www.youtube.com/embed/TiPKfNan3Mw"},
-          {name:"10 (one)",icon:<FiberManualRecordIcon/>,id:11, link:"https://www.youtube.com/embed/T2aSjchxtx0"},
-          {name:"10 (two)",icon:<FiberManualRecordIcon/>,id:10, link:"https://www.youtube.com/embed/T2aSjchxtx0"},
-          {name:"20",icon:<FiberManualRecordIcon/>,id:12, link:"https://www.youtube.com/embed/TiPKfNan3Mw"},
-          {name:"30",icon:<FiberManualRecordIcon/>,id:10, link:"https://www.youtube.com/embed/TiPKfNan3Mw"},].map((item, index) => (
-            <ListItem button key={item.name}  onClick={() => {setNumber(item.id); setVideo(item.link);  setShow(true);}}>
+        {[{name:"0",icon:<FiberManualRecordIcon/>,id:"zero", link:"https://www.youtube.com/embed/BzCTjQht4g0"},
+          {name:"1",icon:<FiberManualRecordIcon/>,id:"one", link:"https://www.youtube.com/embed/NS29lGEqUs8"},
+          {name:"2",icon:<FiberManualRecordIcon/>,id:"two", link:"https://www.youtube.com/embed/TutvHZU4rCE"},
+          {name:"3",icon:<FiberManualRecordIcon/>,id:"three", link:"https://www.youtube.com/embed/4s-tDPcu048"},
+          {name:"4",icon:<FiberManualRecordIcon/>,id:"four", link:"https://www.youtube.com/embed/hiVPVSUvMlA"},
+          {name:"5",icon:<FiberManualRecordIcon/>,id:"five", link:"https://www.youtube.com/embed/DJ7rYmT1Q7Y"},
+          {name:"6 (one)",icon:<FiberManualRecordIcon/>,id:"six_one", link:"https://www.youtube.com/embed/edcUZhYo3fs"},
+          {name:"6 (two)",icon:<FiberManualRecordIcon/>,id:"six_two", link:"https://www.youtube.com/embed/9swRRNYlC5g"},
+          {name:"7 (one)",icon:<FiberManualRecordIcon/>,id:"seven_one", link:"https://www.youtube.com/embed/EmzDPaRHsO4"},
+          {name:"7 (two)",icon:<FiberManualRecordIcon/>,id:"seven_two", link:"https://www.youtube.com/embed/_i-SsdDW2Yg"},
+          {name:"8 (one)",icon:<FiberManualRecordIcon/>,id:"eight_one", link:"https://www.youtube.com/embed/Wv5DcDjGPcQ"},
+          {name:"8 (two)",icon:<FiberManualRecordIcon/>,id:"eight_two", link:"https://www.youtube.com/embed/AXRAn0CPUZg"},
+          {name:"9 (one)",icon:<FiberManualRecordIcon/>,id:"nine_one", link:"https://www.youtube.com/embed/Gj1nzM1rSHY"},
+          {name:"9 (two)",icon:<FiberManualRecordIcon/>,id:"nine_two", link:"https://www.youtube.com/embed/AL5kaBVVIHY"},
+          {name:"10 (one)",icon:<FiberManualRecordIcon/>,id:"ten_one", link:"https://www.youtube.com/embed/T2aSjchxtx0"},
+          {name:"10 (two)",icon:<FiberManualRecordIcon/>,id:"ten_two", link:"https://www.youtube.com/embed/7pVpywbW928"},
+          {name:"20",icon:<FiberManualRecordIcon/>,id:"twenty", link:"https://www.youtube.com/embed/TiPKfNan3Mw"},
+          {name:"30",icon:<FiberManualRecordIcon/>,id:"thirty", link:"https://www.youtube.com/embed/X_cioH2-WpE"},].map((item, index) => (
+            <ListItem 
+              button key={item.name}  
+              onClick={() => {
+                setNumber(item.id); 
+                setVideo(item.link);  
+                setShow(true);
+              }}>
               <ListItemIcon>{index % 2 === 0 ? item.icon:< FiberManualRecordIcon/>}</ListItemIcon>
               <ListItemText primary={item.name} />
             </ListItem>

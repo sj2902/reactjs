@@ -1,6 +1,6 @@
 import React from 'react';
-import {useState} from 'react';
-import { useNavigate } from 'react-router-dom';
+import {useState, useEffect} from 'react';
+import { useNavigate,Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -21,6 +21,10 @@ import ListItemText from '@material-ui/core/ListItemText';
 import MailIcon from '@material-ui/icons/Mail';
 import HomeIcon from '@material-ui/icons/Home';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
+import { getDocs,collection, onSnapshot,doc } from 'firebase/firestore';
+import {db} from './firebase';
+import Navbar from "./navTuto";
+
 
 
 const drawerWidth = 240;
@@ -130,13 +134,23 @@ const useStyles = makeStyles((theme) => ({
       
     }
   },
-  // outer: {
+  options: {
+    display: "grid",
+    gridGap: "1px",
+    marginLeft: "70%",
+    justfiyContent: "right",
+    alignContent: "right",
+
     
+  },
+ 
+  // collist: {
+  //   backgroundColor: "red"
   // }
 }));
 
 
-function PersistentDrawerLeft(){
+function PersistentDrawerLeft({setUser, user}){
   const navigate = useNavigate();
   const classes = useStyles();
   const theme = useTheme();
@@ -144,6 +158,27 @@ function PersistentDrawerLeft(){
   const [alphabet, setAlphabet]= useState(0);
   const [video, setVideo]= useState([]);
   const[show, setShow] = useState(false);
+  const [email, setEmail] =useState("");
+  const [progress, setProgress] = useState({});
+
+  const u_email = user.Email;
+  var user_e = u_email;
+
+  useEffect(()=>{
+    setEmail(localStorage.getItem('user'))
+  },[])
+ 
+  const docRef = doc (db, 'VideoOutput', user_e)
+  onSnapshot(docRef,(doc)=> {
+    // console.log(doc.data());
+    setProgress(doc.data());
+    // if (doc.data().A_two == "Pass"){
+    //   navigate("/certificate");
+    // }
+    // else{
+    //   console.log("fails")
+    // }
+  })
 
   
 
@@ -158,7 +193,18 @@ function PersistentDrawerLeft(){
   const takeTest = () => {
    
     navigate("/assessment",{state: {alphabet: alphabet}});
-  }
+    // navigate("/assessment");
+  };
+
+  const achieve = () => {
+    navigate("/achievements",{state: {progress: progress,alphabet: alphabet}});
+  };
+
+  const gotocourses = () => {
+    navigate("/courses");
+  };
+
+
 
 
 
@@ -167,6 +213,7 @@ function PersistentDrawerLeft(){
   return (
     
     <div className={classes.root}>
+      
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -187,6 +234,15 @@ function PersistentDrawerLeft(){
           <Typography variant="h6" noWrap>
             ALPHABETS
           </Typography>
+          <div className={classes.options}>
+          <Button variant="contained" size="small">
+          <a href="https://forms.gle/cmb9xfjm6FFM4V2J9" target="_blank" >Help</a>
+          </Button>
+          <Button variant="outlined" size="small" onClick={achieve}>
+            Achievements
+          </Button>
+          <Button variant="contained" size="small" onClick={gotocourses}>Courses</Button>
+          </div>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -213,19 +269,18 @@ function PersistentDrawerLeft(){
           ))}
         </List>
         <Divider />
-        <List>
-          {[{name:"A (one)",icon:<FiberManualRecordIcon/>,id:"A_one", link:"https://www.youtube.com/embed/U3V4BrLMtY0"},
+        <List className={classes.collist}>
+        {[{name:"A (one)" , icon:<FiberManualRecordIcon/>,id:"A_one", link:"https://www.youtube.com/embed/U3V4BrLMtY0"},
           {name:"A (two)",icon:<FiberManualRecordIcon/>,id:"A_two", link:"https://www.youtube.com/embed/qJnXqkzA8ZI"},
           {name:"B (one)",icon:<FiberManualRecordIcon/>,id:"B_one", link:"https://www.youtube.com/embed/n_vC-maYVI8"},
           {name:"B (two)",icon:<FiberManualRecordIcon/>,id:"B_two", link:"https://www.youtube.com/embed/faGCD6Gyq3Q"},
-          {name:"C",icon:<FiberManualRecordIcon/>,id:"C", link:"https://www.youtube.com/embed/eVd9jXiTrM4"},
+          {name:"C",icon:<FiberManualRecordIcon/>,id:"C", link:"https://www.youtube.com/embed/RWIa5QJ0Dgo"},
           {name:"D",icon:<FiberManualRecordIcon/>,id:"D", link:"https://www.youtube.com/embed/QU-tAidu86c"},
-          {name:"E (one)",icon:<FiberManualRecordIcon/>,id:"E_one", link:"https://www.youtube.com/embed/dmt16zwUwkI"},
-          {name:"E (two)",icon:<FiberManualRecordIcon/>,id:"E_two", link:"https://www.youtube.com/embed/CT_6Aul1yD8"},
+          {name:"E",icon:<FiberManualRecordIcon/>,id:"E", link:"https://www.youtube.com/embed/a5AO2uz4mMA"},
           {name:"F",icon:<FiberManualRecordIcon/>,id:"F", link:"https://www.youtube.com/embed/jNzLIwnz4Yw"},
           {name:"G",icon:<FiberManualRecordIcon/>,id:"G", link:"https://www.youtube.com/embed/Mg7qpxeZ8vU"},
           {name:"H",icon:<FiberManualRecordIcon/>,id:"H", link:"https://www.youtube.com/embed/Xjl7ngXIm-8"},
-          {name:"I (one)",icon:<FiberManualRecordIcon/>,id:"I_one", link:"https://www.youtube.com/embed/Wyyfwj5buM0"},
+          {name:"I (one)",icon:<FiberManualRecordIcon/>,id:"I_one", link:"https://www.youtube.com/embed/5Fns4B242BE"},
           {name:"I (two)",icon:<FiberManualRecordIcon/>,id:"I_two", link:"https://www.youtube.com/embed/CpDijOM9v_0"},
           {name:"J",icon:<FiberManualRecordIcon/>,id:"J", link:"https://www.youtube.com/embed/ivLdsgncl8U"},
           {name:"K",icon:<FiberManualRecordIcon/>,id:"K", link:"https://www.youtube.com/embed/oKh6NQH_m4M"},
@@ -233,23 +288,25 @@ function PersistentDrawerLeft(){
           {name:"M",icon:<FiberManualRecordIcon/>,id:"M", link:"https://www.youtube.com/embed/kppGRRqlTOU"},
           {name:"N",icon:<FiberManualRecordIcon/>,id:"N", link:"https://www.youtube.com/embed/yyyhBlsEkhk"},
           {name:"O (one)",icon:<FiberManualRecordIcon/>,id:"O_one", link:"https://www.youtube.com/embed/KKLGQM_f6DQ"},
-          {name:"O (two)",icon:<FiberManualRecordIcon/>,id:"O_two", link:"https://www.youtube.com/embed/hFM2DeYi62E"},
-          {name:"P",icon:<FiberManualRecordIcon/>,id:"P", link:"https://www.youtube.com/embed/q-J0yQN226U"},
+          {name:"O (two)",icon:<FiberManualRecordIcon/>,id:"O_two", link:"https://www.youtube.com/embed/4Ott54uzYyg"},
+          {name:"P",icon:<FiberManualRecordIcon/>,id:"P", link:"https://www.youtube.com/embed/XqX-tBuDoTY"},
           {name:"Q",icon:<FiberManualRecordIcon/>,id:"Q", link:"https://www.youtube.com/embed/AS6y3hQk3vA"},
           {name:"R",icon:<FiberManualRecordIcon/>,id:"R", link:"https://www.youtube.com/embed/4_G0_gKSweQ"},
           {name:"S",icon:<FiberManualRecordIcon/>,id:"S", link:"https://www.youtube.com/embed/uYr6fo207Os"},
-          {name:"T",icon:<FiberManualRecordIcon/>,id:"T", link:"https://www.youtube.com/embed/dtHyUeOmwbk"},
+          {name:"T (one)",icon:<FiberManualRecordIcon/>,id:"T_one", link:"https://www.youtube.com/embed/OFTO4KSZte0"},
+          {name:"T (two)",icon:<FiberManualRecordIcon/>,id:"T_two", link:"https://www.youtube.com/embed/HPRq7CjnW5w"},
           {name:"U (one)",icon:<FiberManualRecordIcon/>,id:"U_one", link:"https://www.youtube.com/embed/fxzWvNbCbSY"},
-          {name:"U (two)",icon:<FiberManualRecordIcon/>,id:"U_two", link:"https://www.youtube.com/embed/l2rTK5h2dPU"},
+          {name:"U (two)",icon:<FiberManualRecordIcon/>,id:"U_two", link:"https://www.youtube.com/embed/3KDGDTmTg7s"},
           {name:"V",icon:<FiberManualRecordIcon/>,id:"V", link:"https://www.youtube.com/embed/pwRU7eZRlNY"},
           {name:"W",icon:<FiberManualRecordIcon/>,id:"W", link:"https://www.youtube.com/embed/qSIIH4hf5iY"},
           {name:"X",icon:<FiberManualRecordIcon/>,id:"X", link:"https://www.youtube.com/embed/6hxO8G5Gyng"},
           {name:"Y",icon:<FiberManualRecordIcon/>,id:"Y", link:"https://www.youtube.com/embed/EYAKgX-zPe0"},
           {name:"Z",icon:<FiberManualRecordIcon/>,id:"Z", link:"https://www.youtube.com/embed/B93Ys7VI7Lk"},].map((item, index) => (
             
-            <ListItem button key={item.name}  onClick={() => {setAlphabet(item.id); 
-            
-            console.log(item.id);
+            <ListItem button key={item.name}  onClick={() => {
+            setAlphabet(item.id); 
+            // setSign(item.id);
+            // console.log(item.id);
             setVideo(item.link); 
             setShow(true);
             }}>
@@ -281,6 +338,17 @@ function PersistentDrawerLeft(){
                   </div>:null
           }
         </div>
+        {/* <Link
+          to={{
+            pathname: "/certificate",
+            
+            // state: { alphabet: alphabet}
+          }}
+        >
+          view your certificate</Link> */}
+          {/* <Link  to={{pathname: "https://docs.google.com/forms/d/e/1FAIpQLScQk-Mfqb2uwXDnx8nbUuPMB_IoLcGf4LplrPbg9CTOGNAoCA/viewform"}} target="_blank" >Help</Link> */}
+          {/* <a href="https://forms.gle/cmb9xfjm6FFM4V2J9" target="_blank" >Help</a> */}
+        
     </div>
   );
 }
