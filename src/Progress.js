@@ -328,7 +328,7 @@ function Achievements({setUser, user}){
             <div className={classes.tab}>
                 <table >
                     <tr>
-                        <th>Alphabet </th>
+                        <th>Sign </th>
                         <th> Result</th>
                     </tr>
                             {Object.keys(user_progress).map(item=>{
