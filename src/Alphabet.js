@@ -236,7 +236,7 @@ function PersistentDrawerLeft({setUser, user}){
           </Typography>
           <div className={classes.options}>
           <Button variant="contained" size="small">
-          <a href="https://forms.gle/cmb9xfjm6FFM4V2J9" target="_blank" >Help</a>
+          <a href="https://forms.gle/cmb9xfjm6FFM4V2J9" target="_blank" >Support</a>
           </Button>
           <Button variant="outlined" size="small" onClick={achieve}>
             Achievements

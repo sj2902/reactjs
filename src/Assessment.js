@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from "@material-ui/core/Button";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { storage } from "./firebase";
-import { collection, addDoc, doc, setDoc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc,deleteField } from "firebase/firestore";
 import { db } from './firebase';
 import { getAuth } from 'firebase/auth';
 import {useLocation} from 'react-router-dom';
@@ -173,7 +173,7 @@ const WebcamStreamCapture = ({setUser, user}) => {
             updateDoc(docRef, {[sign] : downloadURL});
 
             const colRef = doc(db, "VideoOutput", user);
-            updateDoc(colRef, {[sign] : downloadURL});
+            updateDoc(colRef, {[sign] : "pending"});
 
 
             // console.log(user);
@@ -279,10 +279,19 @@ const WebcamStreamCapture = ({setUser, user}) => {
 
 
 
-    const handleUpload = (e)  => {
+    const handleUpload = async(e)  => {
+
         e.preventDefault();
         
         uploadFiles();
+        var email_id = u_email;
+
+        
+        const colRef=doc(db,'VideoOutput',email_id);
+
+        await updateDoc(colRef,{
+          'sign': deleteField()
+        });
     };
   
     return (
@@ -296,7 +305,7 @@ const WebcamStreamCapture = ({setUser, user}) => {
           <Webcam audio={false} ref={webcamRef} />
           <br></br>
           <a href="https://drive.google.com/file/d/1J36P12p5qHa0j5et6X0kRPDNpjT0m_Gs/view?usp=sharing" target="_blank" className={classes.ins}>Click here for instructions to perform the sign</a>
-          <p>get ready!: {counter} || hold the sign: {recordCounter}</p>
+          <p>get ready!: {counter} || hold the sign: {recordCounter}seconds</p>
           {/* <p>{recordCounter} seconds </p> */}
           <Button  className={classes.button} onClick={()=>{
               setActionType("start");
@@ -306,6 +315,7 @@ const WebcamStreamCapture = ({setUser, user}) => {
           <Button onClick={handleUpload} variant="contained">Submit</Button>
           <hr />
           <h2>Uploading...{progress}%</h2>
+          <h3>Kindly check your results in 24 hours.</h3>
           <Button onClick={back} variant="contained">Back To Tutorial</Button>
           
 

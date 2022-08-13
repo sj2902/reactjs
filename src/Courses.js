@@ -18,6 +18,7 @@ const courseStyles = makeStyles((theme) => ({
     paper: {
         height: '220px',
         width: '220px',
+        boxShadow: "10px 10px 5px #2e8bc0",
     },
     control: {
         padding: theme.spacing(2),

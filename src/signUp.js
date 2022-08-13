@@ -108,11 +108,11 @@ function SignUp() {
         console.log(email_id);
 
         await setDoc(doc(db, "VideoInput", email_id), {
-          'Email': email_id
+          'sign': 'null',
         });
 
         await setDoc(doc(db, "VideoOutput", email_id), {
-          'Email': email_id
+          'sign': 'null',
         });
       
           
@@ -200,7 +200,7 @@ function SignUp() {
                 value={firstName}
                 fullWidth
                 id="firstName1"
-                label="First Name"
+                label="First Name *"
                 
                 className={classes.detail}
 
@@ -222,7 +222,7 @@ function SignUp() {
                 value={lastName}
                 fullWidth
                 id="lastName1"
-                label="Last Name"
+                label="Last Name *"
                 name="lastName"
                 autoComplete="lname"
                 className={classes.detail}
@@ -240,7 +240,7 @@ function SignUp() {
                 value={email}
                 fullWidth
                 id="email1"
-                label="Email Address"
+                label="Email Address *"
                 name="email"
                 autoComplete="email"
                 className= {classes.detail}
@@ -258,7 +258,7 @@ function SignUp() {
                 value={password}
                 fullWidth
                 name="password"
-                label="Password"
+                label="Password *"
                 type="password"
                 id="password1"
                 autoComplete="current-password"
@@ -276,7 +276,7 @@ function SignUp() {
                 value={cPass}
                 fullWidth
                 name="Cpass"
-                label="Confim Password"
+                label="Confim Password *"
                 type="password"
                 id="Cpassword1"
                 autoComplete="current-password"
