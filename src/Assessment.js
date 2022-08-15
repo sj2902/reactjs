@@ -304,7 +304,7 @@ const WebcamStreamCapture = ({setUser, user}) => {
         <div className={classes.camera}>
           <Webcam audio={false} ref={webcamRef} />
           <br></br>
-          <a href="https://drive.google.com/file/d/1J36P12p5qHa0j5et6X0kRPDNpjT0m_Gs/view?usp=sharing" target="_blank" className={classes.ins}>Click here for instructions to perform the sign</a>
+          <a href="https://drive.google.com/file/d/1twLeIF6nBrLp2wsN-x_ofvVd-spA3GM5/view?usp=sharing" target="_blank" className={classes.ins}>Click here for instructions to perform the sign</a>
           <p>get ready!: {counter} || hold the sign: {recordCounter}seconds</p>
           {/* <p>{recordCounter} seconds </p> */}
           <Button  className={classes.button} onClick={()=>{

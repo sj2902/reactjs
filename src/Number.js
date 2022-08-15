@@ -269,9 +269,7 @@ function PersistentDrawer({setUser, user}){
           {name:"9 (one)",icon:<FiberManualRecordIcon/>,id:"nine_one", link:"https://www.youtube.com/embed/Gj1nzM1rSHY"},
           {name:"9 (two)",icon:<FiberManualRecordIcon/>,id:"nine_two", link:"https://www.youtube.com/embed/AL5kaBVVIHY"},
           {name:"10 (one)",icon:<FiberManualRecordIcon/>,id:"ten_one", link:"https://www.youtube.com/embed/T2aSjchxtx0"},
-          {name:"10 (two)",icon:<FiberManualRecordIcon/>,id:"ten_two", link:"https://www.youtube.com/embed/7pVpywbW928"},
-          {name:"20",icon:<FiberManualRecordIcon/>,id:"twenty", link:"https://www.youtube.com/embed/TiPKfNan3Mw"},
-          {name:"30",icon:<FiberManualRecordIcon/>,id:"thirty", link:"https://www.youtube.com/embed/X_cioH2-WpE"},].map((item, index) => (
+          {name:"10 (two)",icon:<FiberManualRecordIcon/>,id:"ten_two", link:"https://www.youtube.com/embed/7pVpywbW928"},].map((item, index) => (
             <ListItem 
               button key={item.name}  
               onClick={() => {
