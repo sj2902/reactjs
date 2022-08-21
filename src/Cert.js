@@ -26,7 +26,7 @@ class Certificate extends Component {
           <button
             onClick={(e) => {
               e.preventDefault();
-              exportComponentAsPNG(this.certificateWrapper, {
+              exportComponentAsPNG(this.certificateWrapper, {fileName: "certificate",
                 html2CanvasOptions: { backgroundColor: null }
               });
             }}

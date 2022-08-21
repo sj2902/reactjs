@@ -288,10 +288,17 @@ const WebcamStreamCapture = ({setUser, user}) => {
 
         
         const colRef=doc(db,'VideoOutput',email_id);
+        const docRef=doc(db, 'VideoInput', email_id);
+
+        await updateDoc(docRef,{
+          'sign': deleteField()
+        });
 
         await updateDoc(colRef,{
           'sign': deleteField()
         });
+
+
     };
   
     return (
