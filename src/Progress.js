@@ -10,7 +10,7 @@ import './progress.css';
 const useStyles = makeStyles((theme) => ({
     outer:{
         backgroundColor: "#80dd13",
-        height: "200vh",
+        height: "250vh",
         [theme.breakpoints.down('sm')]: {
             height: "250vh"
             
@@ -60,7 +60,7 @@ function Achievements({setUser, user}){
 
     const result = (e) => {
         e.preventDefault()
-        if(Object.keys(user_progress).length !== 50 ){
+        if(Object.keys(user_progress).length !== 48 ){
             alert.error("user has not completed the course");
             errMsg = false;
         }
@@ -89,7 +89,7 @@ function Achievements({setUser, user}){
                     alert.error("user has not completed the course");
                     errMsg = false;
                 }
-                else if(user_progress.E_one !== "Pass"){
+                else if(user_progress.E !== "Pass"){
                     alert.error("user has not completed the course");
                     errMsg = false;
                 }
@@ -254,14 +254,6 @@ function Achievements({setUser, user}){
                     errMsg = false;
                 }
                 else if(user_progress.ten_two !== "Pass"){
-                    alert.error("user has not completed the course");
-                    errMsg = false;
-                }
-                else if(user_progress.twenty !== "Pass"){
-                    alert.error("user has not completed the course");
-                    errMsg = false;
-                }
-                else if(user_progress.thirty !== "Pass"){
                     alert.error("user has not completed the course");
                     errMsg = false;
                 }

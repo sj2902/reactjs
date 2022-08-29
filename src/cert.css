@@ -45,7 +45,8 @@
     font-family: "Staatliches", cursive;
     margin: 0;
     position: absolute;
-    left: 800px;
-    top: 650px;
-    font-size: 80pt;
+    left: 25%;
+    right: 25%;
+    top: 48%;
+    font-size: 50pt;
   }

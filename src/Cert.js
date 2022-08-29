@@ -26,7 +26,7 @@ class Certificate extends Component {
           <button
             onClick={(e) => {
               e.preventDefault();
-              exportComponentAsPNG(this.certificateWrapper, {
+              exportComponentAsPNG(this.certificateWrapper, {fileName: "certificate",
                 html2CanvasOptions: { backgroundColor: null }
               });
             }}
@@ -40,7 +40,7 @@ class Certificate extends Component {
         <div id="downloadWrcerter" ref={this.certificateWrapper}>
           <div id="certificateWrcerter">
             <p>{`${this.props.user.Firstname} ${this.props.user.Lastname}`}</p>
-            <img src="https://i.imgur.com/yR8EANH.png" alt="Certificate" />
+            <img src="https://i.imgur.com/bXjdhvj.jpg" alt="Certificate" />
           </div>
         </div>
       </div>
